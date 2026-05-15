@@ -689,6 +689,21 @@ p{margin:0 0 1em 0;max-width:62ch}
     pointer-events:none;z-index:1;
   }
 }
+/* Tablet: schmalere Spalten → Verlauf weiter nach links komprimieren */
+@media(min-width:840px) and (max-width:1100px){
+  .newsletter__photo::after{
+    background:linear-gradient(to left,
+      rgba(242,237,227,0)    0%,
+      rgba(242,237,227,0)   24%,
+      rgba(242,237,227,.05) 34%,
+      rgba(242,237,227,.38) 47%,
+      rgba(242,237,227,.82) 58%,
+      rgba(242,237,227,.97) 66%,
+      rgb(242,237,227)      73%,
+      rgb(242,237,227)     100%
+    );
+  }
+}
 /* Text-Spalte: linksbündig */
 .newsletter__inner{
   padding:clamp(3rem,8vw,5.5rem) clamp(1.5rem,5vw,3.5rem) clamp(3rem,8vw,5.5rem) clamp(3rem,7vw,7rem);
