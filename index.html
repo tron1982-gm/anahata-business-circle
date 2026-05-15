@@ -243,17 +243,16 @@ p{margin:0 0 1em 0;max-width:62ch}
   border:1px solid var(--bd);border-radius:var(--radius);
   font-weight:500;font-size:1rem;letter-spacing:.01em;
   text-decoration:none;cursor:pointer;
-  transition:transform .15s ease, background .2s ease, color .2s ease, border-color .2s ease;
+  transition:background .2s ease, color .2s ease, border-color .2s ease;
   min-height:48px;
 }
-.btn:hover{transform:translateY(-1px)}
 .btn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 .btn--primary{--bg:var(--ink);--fg:var(--cream);--bd:var(--ink)}
-.btn--primary:hover{--bg:var(--blue-deep);--bd:var(--blue-deep);color:#fff}
+.btn--primary:hover{background:var(--gold);border-color:var(--gold);color:#fff}
 .btn--ghost{--bg:transparent;--fg:var(--ink);--bd:var(--ink)}
-.btn--ghost:hover{--bg:var(--blue-bg);--fg:var(--ink);--bd:var(--blue-deep)}
+.btn--ghost:hover{background:var(--gold);border-color:var(--gold);color:#fff}
 .btn--white{--bg:#fff;--fg:var(--ink);--bd:#fff}
-.btn--white:hover{--bg:var(--gold);--bd:var(--gold);color:#fff}
+.btn--white:hover{background:var(--gold);border-color:var(--gold);color:#fff}
 .btn--small{padding:.65rem 1rem;min-height:42px;font-size:.95rem}
 .btn--block{width:100%}
 .btn[disabled]{opacity:.55;cursor:not-allowed;transform:none}
