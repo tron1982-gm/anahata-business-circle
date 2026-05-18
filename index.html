@@ -1199,26 +1199,26 @@ a.date-big:hover{text-decoration:none;color:inherit}
       class="form-wrap"
       id="anmeldung-form"
       method="POST"
-      action="REPLACE_WITH_ACTIVECAMPAIGN_FORM_ACTION_URL"
+      action="https://pramer21406.activehosted.com/proc.php"
       novalidate
     >
       <h3 style="margin-bottom:1.5rem">Anmeldung</h3>
 
-      <input type="hidden" name="u" value="REPLACE_WITH_AC_ACCOUNT_ID">
-      <input type="hidden" name="f" value="REPLACE_WITH_AC_FORM_ID">
+      <input type="hidden" name="u" value="17">
+      <input type="hidden" name="f" value="17">
       <input type="hidden" name="s">
       <input type="hidden" name="c" value="0">
       <input type="hidden" name="m" value="0">
       <input type="hidden" name="act" value="sub">
       <input type="hidden" name="v" value="2">
-      <input type="hidden" name="or" value="">
+      <input type="hidden" name="or" value="69b1b057-f666-4f9b-bf72-762fa61e5658">
 
       <div class="form-grid">
 
         <!-- Welcher Abend? – Dropdown -->
         <div class="field full">
           <label for="termin">Welcher Abend? <span style="color:var(--danger)" aria-hidden="true">*</span></label>
-          <select id="termin" name="field[TERMIN_FIELD_ID]" required>
+          <select id="termin" name="field[5]" required>
             <option value="">Bitte wählen …</option>
             <option value="Wien · 10.06.2026">Wien – Mittwoch, 10. Juni 2026 · 18:30 Uhr</option>
             <option value="Linz · 15.06.2026">Linz – Montag, 15. Juni 2026 · 18:30 Uhr</option>
@@ -1230,7 +1230,7 @@ a.date-big:hover{text-decoration:none;color:inherit}
         <!-- Anrede & Titel -->
         <div class="field">
           <label for="anrede">Anrede <span style="color:var(--danger)" aria-hidden="true">*</span></label>
-          <select id="anrede" name="field[ANREDE_FIELD_ID]" required>
+          <select id="anrede" name="field[6]" required>
             <option value="">Bitte wählen …</option>
             <option value="Frau">Frau</option>
             <option value="Herr">Herr</option>
@@ -1241,7 +1241,7 @@ a.date-big:hover{text-decoration:none;color:inherit}
         </div>
         <div class="field">
           <label for="titel">Titel <span class="opt">(optional)</span></label>
-          <input type="text" id="titel" name="field[TITEL_FIELD_ID]" placeholder="z. B. Dr., Mag., Ing.">
+          <input type="text" id="titel" name="field[13]" placeholder="z. B. Dr., Mag., Ing.">
         </div>
 
         <!-- Vorname & Nachname -->
@@ -1271,34 +1271,36 @@ a.date-big:hover{text-decoration:none;color:inherit}
         <!-- Unternehmen & Position -->
         <div class="field">
           <label for="company">Unternehmen <span class="opt">(optional)</span></label>
-          <input type="text" id="company" name="field[UNTERNEHMEN_FIELD_ID]" autocomplete="organization">
+          <input type="text" id="company" name="field[14]" autocomplete="organization">
         </div>
         <div class="field">
           <label for="position">Position <span class="opt">(optional)</span></label>
-          <input type="text" id="position" name="field[POSITION_FIELD_ID]" placeholder="z. B. Geschäftsführerin">
+          <input type="text" id="position" name="field[15]" placeholder="z. B. Geschäftsführerin">
         </div>
 
         <!-- UID & Jahrgang -->
         <div class="field">
           <label for="uid">UID-Nummer <span class="opt">(optional)</span></label>
-          <input type="text" id="uid" name="field[UID_FIELD_ID]" placeholder="ATU&hellip;">
+          <input type="text" id="uid" name="field[16]" placeholder="ATU&hellip;">
         </div>
         <div class="field">
           <label for="jahrgang">Jahrgang <span class="opt">(optional)</span></label>
-          <input type="number" id="jahrgang" name="field[JAHRGANG_FIELD_ID]" min="1930" max="2010" placeholder="z. B. 1972">
+          <input type="number" id="jahrgang" name="field[17]" min="1930" max="2010" placeholder="z. B. 1972">
         </div>
 
         <!-- Checkboxen -->
         <div class="field full">
+          <input type="hidden" name="field[12][]" value="~|">
           <label class="consent">
-            <input type="checkbox" name="field[NEWSLETTER_FIELD_ID]" value="ja">
+            <input type="checkbox" name="field[12][]" value="Ich möchte zusätzlich die Impulse von Mag. Gerlinde Pramer per E-Mail erhalten (jederzeit abbestellbar).">
             <span>Ich möchte zusätzlich die Impulse von Mag. Gerlinde Pramer per E-Mail erhalten (jederzeit abbestellbar).</span>
           </label>
         </div>
 
         <div class="field full">
+          <input type="hidden" name="field[18][]" value="~|">
           <label class="consent">
-            <input type="checkbox" name="datenschutz" value="ja" required>
+            <input type="checkbox" id="datenschutz" name="field[18][]" value="Ich habe die Datenschutzerklärung zur Kenntnis genommen und erkläre mich mit der Verarbeitung meiner Angaben zur Anmeldung einverstanden." required>
             <span>Ich habe die <a href="datenschutz.html">Datenschutzerklärung</a> zur Kenntnis genommen und erkläre mich mit der Verarbeitung meiner Angaben zur Anmeldung einverstanden. <span style="color:var(--danger)" aria-hidden="true">*</span></span>
           </label>
         </div>
@@ -1530,12 +1532,16 @@ document.addEventListener('click', e => {
 })();
 
 /* =========================================================
-   Form Validation
+   Form Validation & ActiveCampaign JSONP Submission
    ========================================================= */
 (function(){
   const form = document.getElementById('anmeldung-form');
   if(!form) return;
 
+  const msgEl   = document.getElementById('form-msg');
+  const submitBtn = form.querySelector('button[type="submit"]');
+
+  /* Live-Validierung bei blur / change */
   form.querySelectorAll('input[required], select[required]').forEach(input => {
     input.addEventListener('blur', () => {
       const field = input.closest('.field');
@@ -1551,9 +1557,50 @@ document.addEventListener('click', e => {
     });
   });
 
+  /* AC-Callback: Erfolg */
+  window._show_thank_you = function() {
+    msgEl.className = 'form-msg form-msg--success';
+    msgEl.textContent = 'Vielen Dank! Ihre Anmeldung wurde erfolgreich übermittelt. Sie erhalten in Kürze eine Bestätigung per E-Mail.';
+    form.querySelectorAll('input:not([type=hidden]), select, textarea, button').forEach(el => el.disabled = true);
+    msgEl.scrollIntoView({behavior:'smooth', block:'center'});
+  };
+
+  /* AC-Callback: Fehler */
+  window._show_error = function() {
+    msgEl.className = 'form-msg form-msg--error';
+    msgEl.textContent = 'Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt an office@gerlindepramer.at.';
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Verbindlich anmelden';
+  };
+
+  /* Formular serialisieren (wie AC intern) */
+  function serializeForm(f) {
+    const parts = [];
+    for (const el of f.elements) {
+      if (!el.name) continue;
+      const t = el.type;
+      if (t === 'submit' || t === 'button' || t === 'reset') continue;
+      if ((t === 'checkbox' || t === 'radio') && !el.checked) continue;
+      parts.push(encodeURIComponent(el.name) + '=' + encodeURIComponent(el.value));
+    }
+    return parts.join('&');
+  }
+
+  /* JSONP-Script laden */
+  function loadScript(url) {
+    const s = document.createElement('script');
+    s.charset = 'utf-8';
+    s.src = url;
+    s.onerror = () => window._show_error();
+    document.head.appendChild(s);
+  }
+
+  /* Submit */
   form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    /* Validierung */
     if(!form.checkValidity()){
-      e.preventDefault();
       const firstInvalid = form.querySelector(':invalid');
       if(firstInvalid){
         const field = firstInvalid.closest('.field');
@@ -1561,7 +1608,17 @@ document.addEventListener('click', e => {
         firstInvalid.scrollIntoView({behavior:'smooth', block:'center'});
         firstInvalid.focus({preventScroll:true});
       }
+      return;
     }
+
+    /* Absenden */
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Wird gesendet …';
+    msgEl.className = 'form-msg';
+    msgEl.textContent = '';
+
+    const serialized = serializeForm(form);
+    loadScript('https://pramer21406.activehosted.com/proc.php?' + serialized + '&jsonp=true');
   });
 })();
 </script>
