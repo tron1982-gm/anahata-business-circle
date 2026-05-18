@@ -1570,6 +1570,7 @@ document.addEventListener('click', e => {
   window._show_thank_you = function() {
     msgEl.className = 'form-msg form-msg--success';
     msgEl.textContent = 'Vielen Dank! Ihre Anmeldung wurde erfolgreich übermittelt. Sie erhalten in Kürze eine Bestätigung per E-Mail.';
+    submitBtn.textContent = 'Anmeldung übermittelt ✓';
     form.querySelectorAll('input:not([type=hidden]), select, textarea, button').forEach(el => el.disabled = true);
     msgEl.scrollIntoView({behavior:'smooth', block:'center'});
   };
@@ -1590,7 +1591,7 @@ document.addEventListener('click', e => {
       const t = el.type;
       if (t === 'submit' || t === 'button' || t === 'reset') continue;
       if ((t === 'checkbox' || t === 'radio') && !el.checked) continue;
-      parts.push(encodeURIComponent(el.name) + '=' + encodeURIComponent(el.value));
+      parts.push(el.name + '=' + encodeURIComponent(el.value));
     }
     return parts.join('&');
   }
