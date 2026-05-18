@@ -695,12 +695,12 @@ p{margin:0 0 1em 0;max-width:62ch}
   filter:drop-shadow(-12px 6px 24px rgba(26,58,107,0.14))
          drop-shadow(-4px 2px 8px rgba(26,58,107,0.07));
 }
-/* Mobile: Zoom auf Gerlindes Oberkörper (transform-Ansatz, da Y-overflow nicht möglich) */
+/* Mobile: Zoom auf Gerlindes Oberkörper – Anker bei 82% zeigt Kopf + Körper */
 @media(max-width:839px){
   .newsletter__photo-img{
     object-position:right 75%;
-    transform-origin:right 68%;
-    transform:scale(1.85);
+    transform-origin:right 82%;
+    transform:scale(1.75);
   }
 }
 /* Text-Spalte: linksbündig */
@@ -823,6 +823,17 @@ a.date-big:hover{text-decoration:none;color:inherit}
 /* Consent-Checkbox – vertikale Ausrichtung */
 .consent{align-items:center}
 .consent input[type="checkbox"]{margin-top:0}
+
+/* =========================================================
+   Scroll-Offset – Sticky Topbar kompensieren
+   Gilt für alle Anchor-Ziele, die unter dem fixed Topbar landen
+   ========================================================= */
+#anmeldung{
+  scroll-margin-top:calc(var(--topbar-h) + 1.5rem);
+}
+#anmeldung-form{
+  scroll-margin-top:calc(var(--topbar-h) + 1.25rem);
+}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}
   html{scroll-behavior:auto}
