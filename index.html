@@ -3,26 +3,26 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Anahata Business Circle – Wien · Linz · Graz | Gerlinde Pramer</title>
-<meta name="description" content="Das neue Format von Gerlinde Pramer. Ein Abend für Unternehmer:innen in Wien (10.6.), Linz (15.6.) und Graz (16.6.). Beginn 18:30 Uhr. Kostenlose Teilnahme für die ersten 30 Anmeldungen.">
+<title>Anahata Business Circle – Wien · Linz · Graz | Mag. Gerlinde Pramer</title>
+<meta name="description" content="Das neue Format von Mag. Gerlinde Pramer. Ein Abend für Unternehmer:innen in Wien (10.6.), Linz (15.6.) und Graz (16.6.). Beginn 18:30 Uhr. Kostenlose Teilnahme für die ersten 30 Anmeldungen.">
 <meta name="robots" content="index,follow">
 <meta name="theme-color" content="#FAF7F2">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://tron1982-gm.github.io/anahata-business-circle/">
-<meta property="og:title" content="Anahata Business Circle – Gerlinde Pramer">
+<meta property="og:title" content="Anahata Business Circle – Mag. Gerlinde Pramer">
 <meta property="og:description" content="Ein Abend für Unternehmer:innen in Wien, Linz und Graz. Juni 2026. Kostenlose Teilnahme für die ersten 30 Anmeldungen.">
 <meta property="og:image" content="https://tron1982-gm.github.io/anahata-business-circle/img/og-preview.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Anahata Business Circle – Gerlinde Pramer, Wien · Linz · Graz, Juni 2026">
+<meta property="og:image:alt" content="Anahata Business Circle – Mag. Gerlinde Pramer, Wien · Linz · Graz, Juni 2026">
 <meta property="og:locale" content="de_AT">
 <meta property="og:site_name" content="Anahata Business Circle">
 
 <!-- Twitter / X Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Anahata Business Circle – Das neue Format von Gerlinde Pramer">
+<meta name="twitter:title" content="Anahata Business Circle – Das neue Format von Mag. Gerlinde Pramer">
 <meta name="twitter:description" content="Ein Abend für Unternehmer:innen in Wien, Linz und Graz. Juni 2026. Kostenlose Teilnahme für die ersten 30 Anmeldungen.">
 <meta name="twitter:image" content="https://tron1982-gm.github.io/anahata-business-circle/img/og-preview.jpg">
 
@@ -36,15 +36,15 @@
 
 <style>
 /* =========================================================
-   Design Tokens
+   Design Tokens – Blau/Gold Variante
    ========================================================= */
 :root{
   --cream:        #FAF7F2;
   --cream-deep:   #F2EDE3;
   --surface:      #FFFFFF;
-  --ink:          #1A3A6B;
-  --ink-soft:     #3A4F6E;
-  --ink-muted:    #6A7A94;
+  --ink:          #1A3A6B;        /* Dunkelblau – Haupttext & Überschriften */
+  --ink-soft:     #3A4F6E;          /* Blaugrau – Fließtext */
+  --ink-muted:    #6A7A94;          /* Gedämpfte Texte */
   --line:         #E5DED1;
   --blue:         #6B89A6;        /* Bluse */
   --blue-deep:    #2B5A8C;        /* Blazer */
@@ -179,6 +179,19 @@ p{margin:0 0 1em 0;max-width:62ch}
   color:var(--ink-muted);display:block;line-height:1;margin-top:.2rem;
 }
 .topbar__right{display:flex;align-items:center;gap:.5rem}
+/* Mobile: CTA-Button im Topbar ausblenden */
+@media(max-width:599px){.topbar__cta{display:none!important}}
+/* Im Drawer: CTA-Link als Button-Stil */
+.drawer__cta{
+  display:block;
+  margin-top:1rem;
+  padding:1rem 1.6rem;
+  background:var(--ink);color:var(--cream)!important;
+  border-radius:var(--radius);font-weight:500;font-size:1rem;
+  text-align:center;text-decoration:none!important;
+  border:1px solid var(--ink);
+}
+.drawer__cta:hover{background:var(--gold);border-color:var(--gold)}
 
 /* Burger button */
 .burger{
@@ -230,7 +243,7 @@ p{margin:0 0 1em 0;max-width:62ch}
   border-bottom:1px solid var(--line);
 }
 .drawer__nav a:last-child{border-bottom:0}
-.drawer__nav a:hover{color:var(--blue-deep)}
+.drawer__nav a:hover{color:var(--gold)}
 
 /* =========================================================
    Buttons
@@ -350,7 +363,7 @@ p{margin:0 0 1em 0;max-width:62ch}
    Hero-Termine (eigene Sektion direkt unter Hero)
    ========================================================= */
 .dates-hero{
-  background:var(--blue-darker);
+  background:#1A3A6B;
   color:#fff;
   padding:clamp(3rem, 7vw, 5rem) 0;
   position:relative;
@@ -359,8 +372,8 @@ p{margin:0 0 1em 0;max-width:62ch}
 .dates-hero::before{
   content:"";position:absolute;inset:0;
   background:
-    radial-gradient(ellipse at 0% 0%, rgba(184,153,104,.18), transparent 50%),
-    radial-gradient(ellipse at 100% 100%, rgba(107,137,166,.25), transparent 50%);
+    radial-gradient(ellipse at 0% 0%, rgba(181,149,93,.20), transparent 50%),
+    radial-gradient(ellipse at 100% 100%, rgba(31,67,104,.35), transparent 50%);
   pointer-events:none;
 }
 .dates-hero__inner{position:relative;z-index:1}
@@ -375,24 +388,31 @@ p{margin:0 0 1em 0;max-width:62ch}
   display:flex;flex-direction:column;
   padding:1.75rem 1.75rem 1.5rem;
   border-radius:var(--radius-lg);
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.12);
-  transition:background .2s ease, border-color .2s ease, transform .2s ease;
+  background:#1A3A6B;
+  border:1.5px solid #fff;
+  transition:none;
 }
-.date-big:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.25);transform:translateY(-3px)}
+.date-big:hover{background:var(--gold);border-color:var(--gold)}
+.date-big:hover .date-big__city{color:#fff}
+.date-big:hover .date-big__day{color:rgba(255,255,255,.9)}
+.date-big:hover .date-big__date{color:#fff}
+.date-big:hover .date-big__meta{color:#fff}
+.date-big:hover .date-big__meta strong{color:#fff}
+.date-big:hover .date-big__price .strike{color:rgba(255,255,255,.85);text-decoration-color:rgba(255,255,255,.7)}
+.date-big:hover .date-big__price .free{background:#fff;color:var(--gold)}
 .date-big__city{
   font-family:'Outfit',sans-serif;
   font-size:clamp(2rem, 5vw, 2.75rem);
   font-weight:400;
   letter-spacing:-.02em;
-  color:#fff;
+  color:var(--gold);
   margin:0;
   line-height:1;
 }
 .date-big__day{
   font-family:'Outfit',sans-serif;
   font-size:1.05rem;
-  color:var(--gold-soft);
+  color:rgba(255,255,255,.5);
   margin:.6rem 0 0;
   font-weight:400;
   letter-spacing:.01em;
@@ -456,9 +476,16 @@ p{margin:0 0 1em 0;max-width:62ch}
 .manifesto__quote em{font-style:normal;color:var(--blue-deep)}
 .manifesto__author{
   font-size:.85rem;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--ink-muted);margin-top:1.5rem;display:inline-block;
+  color:var(--ink-muted);margin-top:.75rem;display:inline-block;
 }
 .manifesto__rule{display:block;width:48px;height:1px;background:var(--gold);margin:1.5rem auto;border:0}
+.manifesto__signature{
+  display:block;
+  height:60px;
+  width:auto;
+  margin:1.5rem auto 0;
+  mix-blend-mode:multiply;
+}
 
 /* =========================================================
    Two-column blocks
@@ -516,26 +543,20 @@ p{margin:0 0 1em 0;max-width:62ch}
 .programme__desc{font-size:1rem;color:var(--ink-soft);margin:0;line-height:1.55}
 
 /* =========================================================
-   Date cards (Anmeldungs-Sektion, in Akzent-Blau)
+   Date cards (Anmeldungs-Sektion) – gleiche Farbe wie Dates-Hero
    ========================================================= */
 .dates{
   display:grid;gap:1rem;grid-template-columns:1fr;
 }
 @media(min-width:720px){.dates{grid-template-columns:repeat(3,1fr);gap:1.25rem}}
 .date-card{
-  background:var(--blue-deep);
+  background:#1A3A6B;
   color:#fff;
-  border:1px solid var(--blue-deep);
+  border:1px solid #1A3A6B;
   border-radius:var(--radius-lg);
   padding:1.75rem 1.75rem 2rem;
   display:flex;flex-direction:column;gap:.4rem;
   position:relative;
-  transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
-}
-.date-card:hover{
-  transform:translateY(-2px);
-  box-shadow:var(--shadow-card);
-  background:var(--blue-darker);
 }
 .date-card__city{
   font-family:'Outfit',sans-serif;
@@ -544,7 +565,7 @@ p{margin:0 0 1em 0;max-width:62ch}
 }
 .date-card__date{
   font-family:'Outfit',sans-serif;
-  font-size:1.125rem;color:var(--gold-soft);font-weight:500;letter-spacing:.01em;
+  font-size:1.125rem;color:var(--gold);font-weight:500;letter-spacing:.01em;
   margin:0;
 }
 .date-card__meta{
@@ -626,7 +647,8 @@ p{margin:0 0 1em 0;max-width:62ch}
 
 .consent{display:flex;gap:.75rem;align-items:flex-start;font-size:.92rem;line-height:1.5;color:var(--ink-soft)}
 .consent input[type="checkbox"]{width:20px;height:20px;margin-top:2px;accent-color:var(--blue-deep);flex-shrink:0}
-.form-help{font-size:.9rem;color:var(--ink-muted);margin-top:.5rem}
+.form-help{font-size:.85rem;color:var(--ink-muted);margin-top:.5rem;white-space:nowrap}
+@media(max-width:680px){.form-help{white-space:normal}}
 .form-msg{margin-top:1rem;padding:1rem 1.25rem;border-radius:var(--radius);display:none}
 .form-msg--success{background:#E8F1E8;color:#2C5A2C;border:1px solid #BDD5BD;display:block}
 .form-msg--error{background:#FCEFEF;color:#7A2A2A;border:1px solid #E8C3C3;display:block}
@@ -673,6 +695,12 @@ p{margin:0 0 1em 0;max-width:62ch}
   filter:drop-shadow(-12px 6px 24px rgba(26,58,107,0.14))
          drop-shadow(-4px 2px 8px rgba(26,58,107,0.07));
 }
+/* Mobile: Gerlinde mittig und ab Taille zeigen */
+@media(max-width:839px){
+  .newsletter__photo-img{
+    object-position:65% 15%;
+  }
+}
 /* Text-Spalte: linksbündig */
 .newsletter__inner{
   padding:clamp(3rem,8vw,5.5rem) clamp(1.5rem,5vw,3.5rem) clamp(3rem,8vw,5.5rem) clamp(3rem,7vw,7rem);
@@ -717,7 +745,7 @@ p{margin:0 0 1em 0;max-width:62ch}
    ========================================================= */
 .footer{background:var(--ink);color:#C5CCD7;padding:clamp(2.5rem, 6vw, 4rem) 0 1.5rem;font-size:.95rem}
 .footer a{color:#E8EDF3}
-.footer a:hover{color:#fff}
+.footer a:hover{color:var(--gold)}
 .footer__grid{display:grid;gap:2.5rem;grid-template-columns:1fr;margin-bottom:2.5rem}
 @media(min-width:760px){.footer__grid{grid-template-columns:2fr 1fr 1fr}}
 .footer__brand{display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem;color:#fff}
@@ -749,7 +777,7 @@ p{margin:0 0 1em 0;max-width:62ch}
 }
 .footer__bottom .heart{color:#FF6D8E;display:inline-block;transform:translateY(.05em)}
 .footer__bottom a{color:#A7B2C2}
-.footer__bottom a:hover{color:#fff}
+.footer__bottom a:hover{color:var(--gold)}
 
 /* =========================================================
    Utility
@@ -809,10 +837,10 @@ a.date-big:hover{text-decoration:none;color:inherit}
 <header class="topbar" id="topbar" aria-label="Hauptnavigation">
   <div class="topbar__inner">
     <a href="#top" class="brand" aria-label="Gerlinde Pramer's Anahata Business Circle – Startseite">
-      <img class="brand__logo" src="img/logo-anahata-1line.svg" alt="Gerlinde Pramer's Anahata Business Circle">
+      <img class="brand__logo" src="img/logo-anahata-1line-blau.svg" alt="Gerlinde Pramer's Anahata Business Circle">
     </a>
     <div class="topbar__right">
-      <a href="#anmeldung" class="btn btn--primary btn--small">Jetzt anmelden</a>
+      <a href="#anmeldung" class="btn btn--primary btn--small topbar__cta">Jetzt anmelden</a>
       <button type="button" class="burger" id="burger" aria-controls="drawer" aria-expanded="false" aria-label="Menü öffnen">
         <span class="burger__lines" aria-hidden="true"><span></span><span></span><span></span></span>
       </button>
@@ -830,6 +858,7 @@ a.date-big:hover{text-decoration:none;color:inherit}
       <a href="#anmeldung" data-drawer-link>Termine &amp; Anmeldung</a>
       <a href="#faq" data-drawer-link>Häufige Fragen</a>
       <a href="#kontakt" data-drawer-link>Kontakt</a>
+      <a href="#anmeldung" class="drawer__cta" data-drawer-link>Jetzt anmelden</a>
     </div>
   </div>
 </nav>
@@ -846,7 +875,7 @@ a.date-big:hover{text-decoration:none;color:inherit}
       <div class="hero__content" id="hero-title">
         <img
           class="hero__3line-logo"
-          src="img/logo-anahata-3line.svg"
+          src="img/logo-anahata-3line-blau.svg"
           alt="Gerlinde Pramer's Anahata Business Circle"
         >
         <p class="hero__lead">
@@ -870,7 +899,7 @@ a.date-big:hover{text-decoration:none;color:inherit}
           src="img/hero-800w.jpg"
           srcset="img/hero-480w.jpg 480w, img/hero-800w.jpg 800w, img/hero-1600w.jpg 1600w"
           sizes="(min-width: 900px) 45vw, 100vw"
-          alt="Gerlinde Pramer, lächelnd mit blauem Blazer"
+          alt="Mag. Gerlinde Pramer, lächelnd mit blauem Blazer"
           width="1600" height="1066"
           fetchpriority="high"
           style="object-position:center 15%;"
@@ -885,8 +914,8 @@ a.date-big:hover{text-decoration:none;color:inherit}
      ========================================================= -->
 <section class="dates-hero" aria-labelledby="dates-hero-title">
   <div class="container dates-hero__inner">
-    <span class="eyebrow eyebrow--gold">Die ersten 3 Termine</span>
-    <h2 id="dates-hero-title" style="margin-top:1rem">Wien. Linz. Graz.</h2>
+    <span class="eyebrow eyebrow--gold">SAVE THE DATE</span>
+    <h2 id="dates-hero-title" style="margin-top:1rem">Die ersten 3 Termine</h2>
     <p class="dates-hero__intro">
       Drei Abende im Juni 2026. Je 10 bis 20 Plätze, damit echte Begegnung möglich bleibt. <strong>Kostenlose Teilnahme für die ersten 30 Anmeldungen über alle Städte hinweg.</strong>
     </p>
@@ -897,9 +926,10 @@ a.date-big:hover{text-decoration:none;color:inherit}
         <span class="date-big__day">Mittwoch</span>
         <span class="date-big__date">10. Juni 2026</span>
         <div class="date-big__meta">
-          <strong>Ankommen ab 18:15 Uhr · Beginn 18:30 Uhr</strong>
+          <strong>Ankommen ab 18:15 Uhr<br>Beginn 18:30 Uhr<br>Ende ca. 20:30 Uhr</strong>
           <div class="date-big__price">
             <span class="strike">Eintritt € 30,–</span>
+            <span class="free">Auftakt</span>
           </div>
         </div>
       </a>
@@ -908,9 +938,10 @@ a.date-big:hover{text-decoration:none;color:inherit}
         <span class="date-big__day">Montag</span>
         <span class="date-big__date">15. Juni 2026</span>
         <div class="date-big__meta">
-          <strong>Ankommen ab 18:15 Uhr · Beginn 18:30 Uhr</strong>
+          <strong>Ankommen ab 18:15 Uhr<br>Beginn 18:30 Uhr<br>Ende ca. 20:30 Uhr</strong>
           <div class="date-big__price">
             <span class="strike">Eintritt € 30,–</span>
+            <span class="free">Auftakt</span>
           </div>
         </div>
       </a>
@@ -919,9 +950,10 @@ a.date-big:hover{text-decoration:none;color:inherit}
         <span class="date-big__day">Dienstag</span>
         <span class="date-big__date">16. Juni 2026</span>
         <div class="date-big__meta">
-          <strong>Ankommen ab 18:15 Uhr · Beginn 18:30 Uhr</strong>
+          <strong>Ankommen ab 18:15 Uhr<br>Beginn 18:30 Uhr<br>Ende ca. 20:30 Uhr</strong>
           <div class="date-big__price">
             <span class="strike">Eintritt € 30,–</span>
+            <span class="free">Auftakt</span>
           </div>
         </div>
       </a>
@@ -943,7 +975,12 @@ a.date-big:hover{text-decoration:none;color:inherit}
     <p style="color:var(--ink-soft);max-width:48ch;margin:0 auto;font-size:1.05rem">
       Ich begleite Menschen zurück in diese Verbindung – durch Bewusstsein. Damit sie aus dieser Kraft heraus leben und handeln. In ihrem Unternehmen, in ihren Beziehungen, <span style="white-space:nowrap">in der Welt.</span>
     </p>
-    <span class="manifesto__author">Gerlinde Pramer</span>
+    <img
+      class="manifesto__signature"
+      src="img/unterschrift-gerlinde-pramer.jpg"
+      alt="Unterschrift Mag. Gerlinde Pramer"
+    >
+    <span class="manifesto__author">Mag. Gerlinde Pramer</span>
   </div>
 </section>
 
@@ -971,7 +1008,7 @@ a.date-big:hover{text-decoration:none;color:inherit}
           src="img/thema-800w.jpg"
           srcset="img/thema-480w.jpg 480w, img/thema-800w.jpg 800w, img/thema-1600w.jpg 1600w"
           sizes="(min-width: 840px) 50vw, 100vw"
-          alt="Gerlinde Pramer, Portrait mit blauem Blazer"
+          alt="Mag. Gerlinde Pramer, Portrait mit blauem Blazer"
           style="object-position:center top;"
           width="1600" height="1066"
           loading="lazy"
@@ -1037,7 +1074,7 @@ a.date-big:hover{text-decoration:none;color:inherit}
         </div>
       </li>
       <li>
-        <span class="programme__time">19:30 · offen</span>
+        <span class="programme__time">19:30 · 60 Min</span>
         <div>
           <h3 class="programme__title">Abschluss &amp; Ausklang</h3>
           <p class="programme__desc">Was bleibt. Was Sie mitnehmen. Danach offenes Beisammensein – hier entstehen die Gespräche, für die im Alltag selten Raum ist.</p>
@@ -1058,14 +1095,14 @@ a.date-big:hover{text-decoration:none;color:inherit}
           src="img/gerlinde-portrait-800w.jpg"
           srcset="img/gerlinde-portrait-480w.jpg 480w, img/gerlinde-portrait-800w.jpg 800w, img/gerlinde-portrait-1600w.jpg 1600w"
           sizes="(min-width: 840px) 40vw, 100vw"
-          alt="Gerlinde Pramer am weißen Tisch, ruhiges Halbporträt"
+          alt="Mag. Gerlinde Pramer am weißen Tisch, ruhiges Halbporträt"
           width="1600" height="1068"
           loading="lazy"
         >
       </div>
       <div class="block__content">
-        <span class="eyebrow">Über Gerlinde Pramer</span>
-        <h2 id="gerlinde-title" style="margin-top:1rem">Unternehmerin. Juristin. <br>Und jemand, der weiß, wie sich echter Druck anfühlt.</h2>
+        <span class="eyebrow">Über Mag. Gerlinde Pramer</span>
+        <h2 id="gerlinde-title" style="margin-top:1rem">Unternehmerin. Juristin. MBA (USA).<br>Und jemand, der weiß, wie sich echter Druck anfühlt.</h2>
         <p>
           Fast zwei Jahrzehnte Geschäftsführung im Mittelstand bei Pramer Baustoffe in Linz – mit allem, was dazugehört. Davor Jurastudium, Gerichtsjahr, International MBA in den USA und Wien.
         </p>
@@ -1089,7 +1126,7 @@ a.date-big:hover{text-decoration:none;color:inherit}
       <span class="eyebrow">Termine &amp; Anmeldung</span>
       <h2 id="anmeldung-title" style="margin-top:1rem">Bereit für den Austausch?</h2>
       <p style="margin-top:1rem">
-        Wählen Sie den Abend, der zu Ihnen passt. Die Plätze sind bewusst begrenzt, damit ein wirklicher Austausch entstehen kann. <strong>Die ersten 30 Anmeldungen sind für uns als Premiere kostenlos.</strong>
+        Wählen Sie den Abend, der zu Ihnen passt. Die Plätze sind bewusst begrenzt, damit ein wirklicher Austausch entstehen kann. <strong>Kostenlose Teilnahme für die ersten 30 Anmeldungen über alle Städte hinweg.</strong>
       </p>
     </div>
 
@@ -1098,39 +1135,42 @@ a.date-big:hover{text-decoration:none;color:inherit}
         <h3 class="date-card__city">Wien</h3>
         <p class="date-card__date">Mittwoch, 10. Juni 2026</p>
         <div class="date-card__meta">
-          <strong>Ankommen 18:15 · Beginn 18:30 · Ende ca. 20:00</strong><br>
-          Location wird kurzfristig bekanntgegeben
+          <strong>Ankommen 18:15 Uhr<br>Beginn 18:30 Uhr<br>Ende ca. 20:30 Uhr</strong><br>
+          <br>
+          <strong style="color:var(--gold)">Location wird kurzfristig bekanntgegeben</strong>
           <div class="date-card__price">
             <span class="strike">Investition 30 €</span>
-            <span class="free-tag">Premiere</span>
+            <span class="free-tag">Auftakt</span>
           </div>
-          <p class="date-card__hint">Kostenlose Teilnahme für die ersten 30 Anmeldungen.</p>
+          <p class="date-card__hint">Kostenlose Teilnahme für die ersten 30 Anmeldungen über alle Städte hinweg.</p>
         </div>
       </article>
       <article class="date-card" role="listitem">
         <h3 class="date-card__city">Linz</h3>
         <p class="date-card__date">Montag, 15. Juni 2026</p>
         <div class="date-card__meta">
-          <strong>Ankommen 18:15 · Beginn 18:30 · Ende ca. 20:00</strong><br>
-          Location wird kurzfristig bekanntgegeben
+          <strong>Ankommen 18:15 Uhr<br>Beginn 18:30 Uhr<br>Ende ca. 20:30 Uhr</strong><br>
+          <br>
+          <strong style="color:var(--gold)">Location wird kurzfristig bekanntgegeben</strong>
           <div class="date-card__price">
             <span class="strike">Investition 30 €</span>
-            <span class="free-tag">Premiere</span>
+            <span class="free-tag">Auftakt</span>
           </div>
-          <p class="date-card__hint">Kostenlose Teilnahme für die ersten 30 Anmeldungen.</p>
+          <p class="date-card__hint">Kostenlose Teilnahme für die ersten 30 Anmeldungen über alle Städte hinweg.</p>
         </div>
       </article>
       <article class="date-card" role="listitem">
         <h3 class="date-card__city">Graz</h3>
         <p class="date-card__date">Dienstag, 16. Juni 2026</p>
         <div class="date-card__meta">
-          <strong>Ankommen 18:15 · Beginn 18:30 · Ende ca. 20:00</strong><br>
-          Location wird kurzfristig bekanntgegeben
+          <strong>Ankommen 18:15 Uhr<br>Beginn 18:30 Uhr<br>Ende ca. 20:30 Uhr</strong><br>
+          <br>
+          <strong style="color:var(--gold)">Location wird kurzfristig bekanntgegeben</strong>
           <div class="date-card__price">
             <span class="strike">Investition 30 €</span>
-            <span class="free-tag">Premiere</span>
+            <span class="free-tag">Auftakt</span>
           </div>
-          <p class="date-card__hint">Kostenlose Teilnahme für die ersten 30 Anmeldungen.</p>
+          <p class="date-card__hint">Kostenlose Teilnahme für die ersten 30 Anmeldungen über alle Städte hinweg.</p>
         </div>
       </article>
     </div>
@@ -1239,7 +1279,7 @@ a.date-big:hover{text-decoration:none;color:inherit}
         <div class="field full">
           <label class="consent">
             <input type="checkbox" name="field[NEWSLETTER_FIELD_ID]" value="ja">
-            <span>Ich möchte zusätzlich Gerlinde Pramers Impulse per E-Mail erhalten (jederzeit abbestellbar).</span>
+            <span>Ich möchte zusätzlich die Impulse von Mag. Gerlinde Pramer per E-Mail erhalten (jederzeit abbestellbar).</span>
           </label>
         </div>
 
@@ -1270,7 +1310,7 @@ a.date-big:hover{text-decoration:none;color:inherit}
     <!-- Linke Spalte: Text + Formular -->
     <div class="newsletter__inner">
       <span class="eyebrow">Noch nicht bereit?</span>
-      <h2 id="newsletter-title" style="margin-top:1rem">Lernen Sie Gerlinde Pramer in Ruhe kennen.</h2>
+      <h2 id="newsletter-title" style="margin-top:1rem">Neugierig auf Mag. Gerlinde Pramer? Bleiben Sie am Laufenden.</h2>
       <p style="max-width:46ch;margin:1rem 0 0;color:var(--ink-soft)">
         Gelegentliche kurze Impulse per E-Mail. Keine Werbung, kein Marketing. Nur das, was wir auch im Circle teilen würden.
       </p>
@@ -1311,7 +1351,7 @@ a.date-big:hover{text-decoration:none;color:inherit}
       <img
         class="newsletter__photo-img"
         src="img/newsletter-gerlinde.png"
-        alt="Gerlinde Pramer, Porträt"
+        alt="Mag. Gerlinde Pramer, Porträt"
         width="2400" height="1792"
         loading="lazy"
       >
@@ -1335,7 +1375,7 @@ a.date-big:hover{text-decoration:none;color:inherit}
       </details>
       <details>
         <summary>Was kostet die Teilnahme?</summary>
-        <p>Regulär 30 Euro pro Abend. Als Premiere des neuen Formats sind die ersten 30 Anmeldungen über alle drei Städte hinweg kostenlos. Nach Eingang Ihrer Anmeldung erhalten Sie die Bestätigung – inkl. Hinweis, ob Sie zu den ersten 30 zählen.</p>
+        <p>Regulär 30 Euro pro Abend. Als Auftakt des neuen Formats sind die ersten 30 Anmeldungen über alle drei Städte hinweg kostenlos. Nach Eingang Ihrer Anmeldung erhalten Sie die Bestätigung – inkl. Hinweis, ob Sie zu den ersten 30 zählen.</p>
       </details>
       <details>
         <summary>Wie viele Personen sind dabei?</summary>
@@ -1343,7 +1383,7 @@ a.date-big:hover{text-decoration:none;color:inherit}
       </details>
       <details>
         <summary>Ist das Esoterik?</summary>
-        <p>Nein. Gerlinde Pramer kommt aus dem Mittelstand und spricht die Sprache von Unternehmern. Bewusstsein ist hier keine Mystik, sondern die praktischste Kraft, die es gibt – wie sie selbst sagt.</p>
+        <p>Nein. Mag. Gerlinde Pramer kommt aus dem Mittelstand und spricht die Sprache von Unternehmern. Bewusstsein ist hier keine Mystik, sondern die praktischste Kraft, die es gibt – wie sie selbst sagt.</p>
       </details>
       <details>
         <summary>Was passiert nach der Anmeldung?</summary>
@@ -1369,8 +1409,8 @@ a.date-big:hover{text-decoration:none;color:inherit}
         <div class="footer__brand" style="margin-bottom:.75rem">
           <img src="img/logo-anahata-1line-white.svg" alt="Gerlinde Pramer's Anahata Business Circle" style="height:104px;width:auto;max-width:100%">
         </div>
-        <p style="max-width:42ch;color:#9097A3;margin-top:.5rem;font-size:.95rem">
-          Ein Format für Unternehmer und Führungskräfte, die mehr suchen als das nächste Tool.
+        <p style="max-width:42ch;color:rgba(255,255,255,.7);margin-top:.5rem;font-size:.95rem">
+          Ein neues Format für Unternehmer und Führungskräfte, die mehr suchen als nur das nächste Tool.
         </p>
 
         <div class="footer__logos" aria-label="Logos">
@@ -1386,7 +1426,7 @@ a.date-big:hover{text-decoration:none;color:inherit}
           <li><a href="#anmeldung">Wien · 10.06.</a></li>
           <li><a href="#anmeldung">Linz · 15.06.</a></li>
           <li><a href="#anmeldung">Graz · 16.06.</a></li>
-          <li style="color:#8B95A4;font-style:italic">Weitere in Planung</li>
+          <li style="color:rgba(255,255,255,.45);font-style:italic">Weitere in Planung</li>
         </ul>
       </div>
       <div>

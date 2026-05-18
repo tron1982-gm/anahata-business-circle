@@ -2,7 +2,7 @@
 <html lang="de-AT">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Impressum – Gerlinde Pramer's Anahata Business Circle</title>
 <meta name="robots" content="noindex,nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -10,29 +10,129 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --cream:#FAF7F2;--ink:#1A2332;--ink-soft:#3F4A5C;--ink-muted:#6E7787;
-  --line:#E5DED1;--blue-deep:#2B5A8C;--blue-darker:#1F4368;--gold:#B89968;
-  --max:780px;--gutter:clamp(1.25rem,4vw,2.5rem);--radius:4px;
+  --cream:#FAF7F2;--cream-deep:#F2EDE3;--surface:#FFFFFF;
+  --ink:#1A3A6B;--ink-soft:#3A4F6E;--ink-muted:#6A7A94;
+  --line:#E5DED1;--blue-deep:#2B5A8C;--blue-darker:#1F4368;
+  --gold:#B89968;--gold-soft:#E7DCC6;--danger:#B33A3A;
+  --max:1180px;--content-max:780px;
+  --gutter:clamp(1.25rem,4vw,2.5rem);--radius:4px;--radius-lg:10px;
+  --shadow-soft:0 1px 2px rgba(26,58,107,.04),0 8px 24px rgba(26,58,107,.06);
+  --topbar-h:104px;
 }
 *,*::before,*::after{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{
-  margin:0;
+  margin:0;padding-top:var(--topbar-h);
   font-family:'Inter',system-ui,sans-serif;
   font-size:1.05rem;line-height:1.7;
   color:var(--ink-soft);background:var(--cream);
   -webkit-font-smoothing:antialiased;
 }
+img{max-width:100%;height:auto;display:block}
+
+/* =========================================================
+   Topbar – immer sichtbar auf Unterseiten
+   ========================================================= */
 .topbar{
-  background:var(--blue-darker);padding:1rem var(--gutter);
-  display:flex;align-items:center;justify-content:space-between;
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  background:rgba(250,247,242,.96);
+  backdrop-filter:saturate(140%) blur(10px);
+  -webkit-backdrop-filter:saturate(140%) blur(10px);
+  border-bottom:1px solid var(--line);
 }
-.topbar a{color:#fff;text-decoration:none;font-family:'Outfit',sans-serif;font-size:.95rem;opacity:.85}
-.topbar a:hover{opacity:1}
-.topbar__logo{height:32px;width:auto}
-.container{max-width:var(--max);margin:0 auto;padding:3rem var(--gutter) 5rem}
-h1{font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(1.75rem,4vw,2.5rem);color:var(--ink);letter-spacing:-.02em;line-height:1.15;margin:0 0 2rem}
-h2{font-family:'Outfit',sans-serif;font-weight:600;font-size:1rem;letter-spacing:.14em;text-transform:uppercase;color:var(--blue-deep);margin:2rem 0 .5rem}
+.topbar__inner{
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  padding:.75rem var(--gutter);
+  max-width:var(--max);margin:0 auto;
+  min-height:var(--topbar-h);
+}
+.brand{display:flex;align-items:center;gap:.65rem;text-decoration:none;color:var(--ink)}
+.brand__logo{height:86px;width:auto;display:block}
+.topbar__right{display:flex;align-items:center;gap:.5rem}
+
+/* Mobile: CTA-Button im Topbar ausblenden */
+@media(max-width:599px){.topbar__cta{display:none!important}}
+
+/* Buttons */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+  padding:1rem 1.6rem;
+  background:var(--ink);color:var(--cream);
+  border:1px solid var(--ink);border-radius:var(--radius);
+  font-family:'Inter',sans-serif;font-weight:500;font-size:1rem;
+  text-decoration:none;cursor:pointer;
+  transition:background .2s ease,border-color .2s ease;
+  min-height:48px;
+}
+.btn:hover{background:var(--gold);border-color:var(--gold);color:#fff}
+.btn--small{padding:.65rem 1rem;min-height:42px;font-size:.95rem}
+.btn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+
+/* Burger */
+.burger{
+  width:44px;height:44px;
+  display:inline-flex;align-items:center;justify-content:center;
+  background:transparent;border:1px solid var(--line);border-radius:var(--radius);
+  cursor:pointer;transition:background .15s ease,border-color .15s ease;
+}
+.burger:hover{background:#fff;border-color:var(--ink)}
+.burger:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.burger__lines{position:relative;width:18px;height:14px}
+.burger__lines span{
+  position:absolute;left:0;width:100%;height:2px;background:var(--ink);border-radius:2px;
+  transition:transform .25s ease,top .25s ease,opacity .2s ease;
+}
+.burger__lines span:nth-child(1){top:0}
+.burger__lines span:nth-child(2){top:6px}
+.burger__lines span:nth-child(3){top:12px}
+.burger.is-open .burger__lines span:nth-child(1){top:6px;transform:rotate(45deg)}
+.burger.is-open .burger__lines span:nth-child(2){opacity:0}
+.burger.is-open .burger__lines span:nth-child(3){top:6px;transform:rotate(-45deg)}
+
+/* Drawer */
+.drawer{
+  position:fixed;top:var(--topbar-h);left:0;right:0;
+  background:var(--cream);border-bottom:1px solid var(--line);
+  box-shadow:0 12px 40px rgba(26,58,107,.12);
+  transform:translateY(-16px);opacity:0;visibility:hidden;
+  transition:transform .25s ease,opacity .25s ease,visibility 0s linear .25s;
+  z-index:49;
+}
+.drawer.is-open{
+  transform:translateY(0);opacity:1;visibility:visible;
+  transition:transform .25s ease,opacity .25s ease,visibility 0s linear 0s;
+}
+.drawer__inner{max-width:var(--max);margin:0 auto;padding:1.5rem var(--gutter) 2rem}
+.drawer__nav{display:flex;flex-direction:column;gap:.25rem}
+.drawer__nav a{
+  display:block;padding:1rem 0;
+  font-family:'Outfit',sans-serif;font-size:1.5rem;font-weight:400;letter-spacing:-.01em;
+  color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line);
+}
+.drawer__nav a:last-of-type{border-bottom:0}
+.drawer__nav a:hover{color:var(--blue-deep)}
+.drawer__cta{
+  display:block;margin-top:1rem;
+  padding:1rem 1.6rem;background:var(--ink);color:var(--cream)!important;
+  border-radius:var(--radius);font-weight:500;font-size:1rem;
+  text-align:center;text-decoration:none!important;border:1px solid var(--ink);
+}
+.drawer__cta:hover{background:var(--gold);border-color:var(--gold)}
+
+/* =========================================================
+   Content
+   ========================================================= */
+.container{max-width:var(--content-max);margin:0 auto;padding:3rem var(--gutter) 5rem}
+h1{
+  font-family:'Outfit',sans-serif;font-weight:400;
+  font-size:clamp(1.75rem,4vw,2.5rem);color:var(--ink);
+  letter-spacing:-.02em;line-height:1.15;margin:0 0 2rem;
+}
+h2{
+  font-family:'Outfit',sans-serif;font-weight:600;
+  font-size:1rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--blue-deep);margin:2rem 0 .5rem;
+}
 p{margin:0 0 1em}
 a{color:var(--blue-deep)}
 a:hover{color:var(--ink)}
@@ -44,16 +144,73 @@ hr{border:0;height:1px;background:var(--line);margin:2rem 0}
 .back:hover{color:var(--blue-deep)}
 .back::before{content:"←"}
 address{font-style:normal;line-height:1.8}
+
+/* =========================================================
+   Footer
+   ========================================================= */
+.footer{background:var(--ink);color:#C5CCD7;padding:clamp(2.5rem,6vw,4rem) 0 1.5rem;font-size:.95rem}
+.footer a{color:#E8EDF3}
+.footer a:hover{color:var(--gold)}
+.footer__grid{display:grid;gap:2.5rem;grid-template-columns:1fr;margin-bottom:2.5rem}
+@media(min-width:760px){.footer__grid{grid-template-columns:2fr 1fr 1fr}}
+.footer__brand{display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem;color:#fff}
+.footer h4{color:#fff;font-family:'Outfit',sans-serif;font-size:.85rem;letter-spacing:.18em;text-transform:uppercase;margin-bottom:.75rem}
+.footer ul{list-style:none;padding:0;margin:0}
+.footer li{margin-bottom:.4rem}
+.footer__logos{
+  display:flex;flex-wrap:wrap;align-items:center;gap:2rem;
+  margin:1.5rem 0 0;padding:1.25rem 0;border-top:1px solid #2D3848;
+}
+.footer__logo--gpm{height:54px;width:auto;filter:brightness(0) invert(1);opacity:.92}
+.footer__logo--traum{height:80px;width:auto;opacity:.95}
+.footer__bottom{
+  border-top:1px solid #2D3848;padding-top:1.5rem;
+  display:flex;flex-wrap:wrap;justify-content:space-between;gap:.75rem;
+  font-size:.85rem;color:#8B95A4;
+}
+.footer__bottom .heart{color:#FF6D8E;display:inline-block;transform:translateY(.05em)}
+.footer__bottom a{color:#A7B2C2}
+.footer__bottom a:hover{color:var(--gold)}
+.footer-container{max-width:var(--max);margin:0 auto;padding:0 var(--gutter)}
+
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px;border-radius:2px}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}
+  html{scroll-behavior:auto}
+}
 </style>
 </head>
 <body>
 
-<header class="topbar">
-  <a href="index.html">
-    <img class="topbar__logo" src="img/logo-anahata-3line-dark.svg" alt="Anahata Business Circle">
-  </a>
-  <a href="index.html">← Zurück zur Hauptseite</a>
+<!-- Sticky Navigation -->
+<header class="topbar" id="topbar" aria-label="Hauptnavigation">
+  <div class="topbar__inner">
+    <a href="index.html" class="brand" aria-label="Anahata Business Circle – Startseite">
+      <img class="brand__logo" src="img/logo-anahata-1line-blau.svg" alt="Gerlinde Pramer's Anahata Business Circle">
+    </a>
+    <div class="topbar__right">
+      <a href="index.html#anmeldung" class="btn btn--small topbar__cta">Jetzt anmelden</a>
+      <button type="button" class="burger" id="burger" aria-controls="drawer" aria-expanded="false" aria-label="Menü öffnen">
+        <span class="burger__lines" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
 </header>
+
+<nav class="drawer" id="drawer" aria-label="Seitennavigation">
+  <div class="drawer__inner">
+    <div class="drawer__nav">
+      <a href="index.html#thema" data-drawer-link>Das Thema</a>
+      <a href="index.html#abend" data-drawer-link>Der Abend</a>
+      <a href="index.html#gerlinde" data-drawer-link>Über Gerlinde</a>
+      <a href="index.html#anmeldung" data-drawer-link>Termine &amp; Anmeldung</a>
+      <a href="index.html#faq" data-drawer-link>Häufige Fragen</a>
+      <a href="index.html#kontakt" data-drawer-link>Kontakt</a>
+      <a href="index.html#anmeldung" class="drawer__cta" data-drawer-link>Jetzt anmelden</a>
+    </div>
+  </div>
+</nav>
 
 <main class="container">
   <a href="index.html" class="back">Zurück zur Hauptseite</a>
@@ -77,5 +234,80 @@ address{font-style:normal;line-height:1.8}
   <p>Im Hinblick auf die technischen Eigenschaften des Internets kann keine Gewähr für die Authentizität, Richtigkeit und Vollständigkeit der im Internet zur Verfügung gestellten Informationen übernommen werden. Es wird auch keine Gewähr für die Verfügbarkeit oder den Betrieb der gegenständlichen Webseite und ihrer Inhalte übernommen. Jede Haftung für unmittelbare, mittelbare oder sonstige Schäden, unabhängig von deren Ursachen, die aus der Benutzung oder Nichtverfügbarkeit der Daten und Informationen dieser Webseite erwachsen, wird, soweit rechtlich zulässig, ausgeschlossen.</p>
 </main>
 
+<!-- Footer -->
+<footer class="footer" id="kontakt">
+  <div class="footer-container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">
+          <img src="img/logo-anahata-1line-white.svg" alt="Gerlinde Pramer's Anahata Business Circle" style="height:104px;width:auto;max-width:100%">
+        </div>
+        <p style="max-width:42ch;color:#9097A3;margin-top:.5rem;font-size:.95rem">
+          Ein neues Format für Unternehmer und Führungskräfte, die mehr suchen als nur das nächste Tool.
+        </p>
+        <div class="footer__logos" aria-label="Logos">
+          <a href="https://www.pramer.com" target="_blank" rel="noopener noreferrer">
+            <img class="footer__logo--gpm" src="img/gpm-logo.png" alt="Gerlinde Pramer Management" width="600" height="353">
+          </a>
+          <img class="footer__logo--traum" src="img/lebe-deinen-traum.png" alt="Lebe deinen Traum – Logo" width="320" height="343">
+        </div>
+      </div>
+      <div>
+        <h4>Termine</h4>
+        <ul>
+          <li><a href="index.html#anmeldung">Wien · 10.06.</a></li>
+          <li><a href="index.html#anmeldung">Linz · 15.06.</a></li>
+          <li><a href="index.html#anmeldung">Graz · 16.06.</a></li>
+          <li style="color:rgba(255,255,255,.45);font-style:italic">Weitere in Planung</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Kontakt</h4>
+        <ul>
+          <li><a href="mailto:pramer@pramer.com">pramer@pramer.com</a></li>
+          <li><a href="datenschutz.html">Datenschutz</a></li>
+          <li><a href="impressum.html">Impressum</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Gerlinde Pramer Management</span>
+      <span>
+        Fotos: <a href="https://www.danielakoeppl.at/" target="_blank" rel="noopener noreferrer">Daniela Köppl</a> ·
+        Made with <span class="heart" aria-label="Liebe">♥</span> by
+        <a href="https://www.nfbrands.xyz" target="_blank" rel="noopener noreferrer">NFBrands.X</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const burger = document.getElementById('burger');
+const drawer = document.getElementById('drawer');
+
+function openDrawer(){
+  drawer.classList.add('is-open');
+  burger.classList.add('is-open');
+  burger.setAttribute('aria-expanded','true');
+  burger.setAttribute('aria-label','Menü schließen');
+}
+function closeDrawer(){
+  if(!drawer.classList.contains('is-open')) return;
+  drawer.classList.remove('is-open');
+  burger.classList.remove('is-open');
+  burger.setAttribute('aria-expanded','false');
+  burger.setAttribute('aria-label','Menü öffnen');
+}
+burger.addEventListener('click',(e)=>{
+  e.stopPropagation();
+  if(drawer.classList.contains('is-open')) closeDrawer(); else openDrawer();
+});
+document.querySelectorAll('[data-drawer-link]').forEach(a=>a.addEventListener('click',()=>closeDrawer()));
+document.addEventListener('keydown',e=>{if(e.key==='Escape') closeDrawer()});
+document.addEventListener('click',e=>{
+  if(!drawer.classList.contains('is-open')) return;
+  if(!drawer.contains(e.target)&&!burger.contains(e.target)) closeDrawer();
+});
+</script>
 </body>
 </html>

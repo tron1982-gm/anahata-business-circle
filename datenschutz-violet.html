@@ -11,12 +11,12 @@
 <style>
 :root{
   --cream:#FAF7F2;--cream-deep:#F2EDE3;--surface:#FFFFFF;
-  --ink:#1A3A6B;--ink-soft:#3A4F6E;--ink-muted:#6A7A94;
-  --line:#E5DED1;--blue-deep:#2B5A8C;--blue-darker:#1F4368;
-  --gold:#B89968;--gold-soft:#E7DCC6;--danger:#B33A3A;
+  --ink:#3D3270;--ink-soft:#554596;--ink-muted:#7A6EA0;
+  --line:#E5DED1;--blue-deep:#554596;--blue-darker:#2C2451;
+  --gold:#B5955D;--gold-soft:#E7DCC6;--danger:#B33A3A;
   --max:1180px;--content-max:780px;
   --gutter:clamp(1.25rem,4vw,2.5rem);--radius:4px;--radius-lg:10px;
-  --shadow-soft:0 1px 2px rgba(26,58,107,.04),0 8px 24px rgba(26,58,107,.06);
+  --shadow-soft:0 1px 2px rgba(61,50,112,.04),0 8px 24px rgba(61,50,112,.06);
   --topbar-h:104px;
 }
 *,*::before,*::after{box-sizing:border-box}
@@ -57,8 +57,8 @@ img{max-width:100%;height:auto;display:block}
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
   padding:1rem 1.6rem;
-  background:var(--ink);color:var(--cream);
-  border:1px solid var(--ink);border-radius:var(--radius);
+  background:#554596;color:#fff;
+  border:1px solid #554596;border-radius:var(--radius);
   font-family:'Inter',sans-serif;font-weight:500;font-size:1rem;
   text-decoration:none;cursor:pointer;
   transition:background .2s ease,border-color .2s ease;
@@ -93,7 +93,7 @@ img{max-width:100%;height:auto;display:block}
 .drawer{
   position:fixed;top:var(--topbar-h);left:0;right:0;
   background:var(--cream);border-bottom:1px solid var(--line);
-  box-shadow:0 12px 40px rgba(26,58,107,.12);
+  box-shadow:0 12px 40px rgba(61,50,112,.12);
   transform:translateY(-16px);opacity:0;visibility:hidden;
   transition:transform .25s ease,opacity .25s ease,visibility 0s linear .25s;
   z-index:49;
@@ -113,9 +113,9 @@ img{max-width:100%;height:auto;display:block}
 .drawer__nav a:hover{color:var(--blue-deep)}
 .drawer__cta{
   display:block;margin-top:1rem;
-  padding:1rem 1.6rem;background:var(--ink);color:var(--cream)!important;
+  padding:1rem 1.6rem;background:#554596;color:#fff!important;
   border-radius:var(--radius);font-weight:500;font-size:1rem;
-  text-align:center;text-decoration:none!important;border:1px solid var(--ink);
+  text-align:center;text-decoration:none!important;border:1px solid #554596;
 }
 .drawer__cta:hover{background:var(--gold);border-color:var(--gold)}
 
@@ -151,8 +151,8 @@ address{font-style:normal;line-height:1.7}
 /* =========================================================
    Footer
    ========================================================= */
-.footer{background:var(--ink);color:#C5CCD7;padding:clamp(2.5rem,6vw,4rem) 0 1.5rem;font-size:.95rem}
-.footer a{color:#E8EDF3}
+.footer{background:#554596;color:rgba(255,255,255,.82);padding:clamp(2.5rem,6vw,4rem) 0 1.5rem;font-size:.95rem}
+.footer a{color:rgba(255,255,255,.92)}
 .footer a:hover{color:var(--gold)}
 .footer__grid{display:grid;gap:2.5rem;grid-template-columns:1fr;margin-bottom:2.5rem}
 @media(min-width:760px){.footer__grid{grid-template-columns:2fr 1fr 1fr}}
@@ -162,17 +162,17 @@ address{font-style:normal;line-height:1.7}
 .footer li{margin-bottom:.4rem}
 .footer__logos{
   display:flex;flex-wrap:wrap;align-items:center;gap:2rem;
-  margin:1.5rem 0 0;padding:1.25rem 0;border-top:1px solid #2D3848;
+  margin:1.5rem 0 0;padding:1.25rem 0;border-top:1px solid rgba(255,255,255,.2);
 }
 .footer__logo--gpm{height:54px;width:auto;filter:brightness(0) invert(1);opacity:.92}
 .footer__logo--traum{height:80px;width:auto;opacity:.95}
 .footer__bottom{
-  border-top:1px solid #2D3848;padding-top:1.5rem;
+  border-top:1px solid rgba(255,255,255,.2);padding-top:1.5rem;
   display:flex;flex-wrap:wrap;justify-content:space-between;gap:.75rem;
-  font-size:.85rem;color:#8B95A4;
+  font-size:.85rem;color:rgba(255,255,255,.6);
 }
-.footer__bottom .heart{color:#FF6D8E;display:inline-block;transform:translateY(.05em)}
-.footer__bottom a{color:#A7B2C2}
+.footer__bottom .heart{color:#FF9DB5;display:inline-block;transform:translateY(.05em)}
+.footer__bottom a{color:rgba(255,255,255,.75)}
 .footer__bottom a:hover{color:var(--gold)}
 .footer-container{max-width:var(--max);margin:0 auto;padding:0 var(--gutter)}
 
@@ -189,11 +189,11 @@ address{font-style:normal;line-height:1.7}
 <!-- Sticky Navigation -->
 <header class="topbar" id="topbar" aria-label="Hauptnavigation">
   <div class="topbar__inner">
-    <a href="index.html" class="brand" aria-label="Anahata Business Circle – Startseite">
-      <img class="brand__logo" src="img/logo-anahata-1line-blau.svg" alt="Gerlinde Pramer's Anahata Business Circle">
+    <a href="index-violet.html" class="brand" aria-label="Anahata Business Circle – Startseite">
+      <img class="brand__logo" src="img/logo-anahata-1line-violet.svg" alt="Gerlinde Pramer's Anahata Business Circle">
     </a>
     <div class="topbar__right">
-      <a href="index.html#anmeldung" class="btn btn--small topbar__cta">Jetzt anmelden</a>
+      <a href="index-violet.html#anmeldung" class="btn btn--small topbar__cta">Jetzt anmelden</a>
       <button type="button" class="burger" id="burger" aria-controls="drawer" aria-expanded="false" aria-label="Menü öffnen">
         <span class="burger__lines" aria-hidden="true"><span></span><span></span><span></span></span>
       </button>
@@ -204,19 +204,19 @@ address{font-style:normal;line-height:1.7}
 <nav class="drawer" id="drawer" aria-label="Seitennavigation">
   <div class="drawer__inner">
     <div class="drawer__nav">
-      <a href="index.html#thema" data-drawer-link>Das Thema</a>
-      <a href="index.html#abend" data-drawer-link>Der Abend</a>
-      <a href="index.html#gerlinde" data-drawer-link>Über Gerlinde</a>
-      <a href="index.html#anmeldung" data-drawer-link>Termine &amp; Anmeldung</a>
-      <a href="index.html#faq" data-drawer-link>Häufige Fragen</a>
-      <a href="index.html#kontakt" data-drawer-link>Kontakt</a>
-      <a href="index.html#anmeldung" class="drawer__cta" data-drawer-link>Jetzt anmelden</a>
+      <a href="index-violet.html#thema" data-drawer-link>Das Thema</a>
+      <a href="index-violet.html#abend" data-drawer-link>Der Abend</a>
+      <a href="index-violet.html#gerlinde" data-drawer-link>Über Gerlinde</a>
+      <a href="index-violet.html#anmeldung" data-drawer-link>Termine &amp; Anmeldung</a>
+      <a href="index-violet.html#faq" data-drawer-link>Häufige Fragen</a>
+      <a href="index-violet.html#kontakt" data-drawer-link>Kontakt</a>
+      <a href="index-violet.html#anmeldung" class="drawer__cta" data-drawer-link>Jetzt anmelden</a>
     </div>
   </div>
 </nav>
 
 <main class="container">
-  <a href="index.html" class="back">Zurück zur Hauptseite</a>
+  <a href="index-violet.html" class="back">Zurück zur Hauptseite</a>
 
   <h1>Datenschutzerklärung</h1>
   <p class="meta">Informationen gemäß Art. 13 und 14 DSGVO · Stand: April 2026</p>
@@ -290,8 +290,8 @@ address{font-style:normal;line-height:1.7}
         <div class="footer__brand">
           <img src="img/logo-anahata-1line-white.svg" alt="Gerlinde Pramer's Anahata Business Circle" style="height:104px;width:auto;max-width:100%">
         </div>
-        <p style="max-width:42ch;color:#9097A3;margin-top:.5rem;font-size:.95rem">
-          Ein neues Format für Unternehmer und Führungskräfte, die mehr suchen als nur das nächste Tool.
+        <p style="max-width:42ch;color:rgba(255,255,255,.7);margin-top:.5rem;font-size:.95rem">
+          Ein Format für Unternehmer und Führungskräfte, die mehr suchen als das nächste Tool.
         </p>
         <div class="footer__logos" aria-label="Logos">
           <a href="https://www.pramer.com" target="_blank" rel="noopener noreferrer">
@@ -303,9 +303,9 @@ address{font-style:normal;line-height:1.7}
       <div>
         <h4>Termine</h4>
         <ul>
-          <li><a href="index.html#anmeldung">Wien · 10.06.</a></li>
-          <li><a href="index.html#anmeldung">Linz · 15.06.</a></li>
-          <li><a href="index.html#anmeldung">Graz · 16.06.</a></li>
+          <li><a href="index-violet.html#anmeldung">Wien · 10.06.</a></li>
+          <li><a href="index-violet.html#anmeldung">Linz · 15.06.</a></li>
+          <li><a href="index-violet.html#anmeldung">Graz · 16.06.</a></li>
           <li style="color:rgba(255,255,255,.45);font-style:italic">Weitere in Planung</li>
         </ul>
       </div>
@@ -313,8 +313,8 @@ address{font-style:normal;line-height:1.7}
         <h4>Kontakt</h4>
         <ul>
           <li><a href="mailto:pramer@pramer.com">pramer@pramer.com</a></li>
-          <li><a href="datenschutz.html">Datenschutz</a></li>
-          <li><a href="impressum.html">Impressum</a></li>
+          <li><a href="datenschutz-violet.html">Datenschutz</a></li>
+          <li><a href="impressum-violet.html">Impressum</a></li>
         </ul>
       </div>
     </div>
