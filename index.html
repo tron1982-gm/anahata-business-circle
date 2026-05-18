@@ -481,7 +481,7 @@ p{margin:0 0 1em 0;max-width:62ch}
 .manifesto__rule{display:block;width:48px;height:1px;background:var(--gold);margin:1.5rem auto;border:0}
 .manifesto__signature{
   display:block;
-  height:60px;
+  height:120px;
   width:auto;
   margin:1.5rem auto 0;
   mix-blend-mode:multiply;
@@ -695,10 +695,12 @@ p{margin:0 0 1em 0;max-width:62ch}
   filter:drop-shadow(-12px 6px 24px rgba(26,58,107,0.14))
          drop-shadow(-4px 2px 8px rgba(26,58,107,0.07));
 }
-/* Mobile: Gerlinde mittig und ab Taille zeigen */
+/* Mobile: Zoom auf Gerlindes Oberkörper (transform-Ansatz, da Y-overflow nicht möglich) */
 @media(max-width:839px){
   .newsletter__photo-img{
-    object-position:65% 15%;
+    object-position:right 75%;
+    transform-origin:right 68%;
+    transform:scale(1.85);
   }
 }
 /* Text-Spalte: linksbündig */
@@ -882,7 +884,7 @@ a.date-big:hover{text-decoration:none;color:inherit}
           Ein neues Format für Unternehmer:innen<sup>*</sup> und Führungskräfte, die mehr suchen als nur das nächste Tool.
           Ein Raum, den es so noch nicht gegeben hat.<br>
           <br>
-          <strong>Premiere im Juni 2026 in Wien, Linz und Graz.</strong>
+          <strong>Auftakt im Juni 2026 in Wien, Linz und Graz.</strong>
         </p>
         <div class="hero__cta">
           <a href="#anmeldung" class="btn btn--primary">Jetzt anmelden</a>
@@ -921,7 +923,7 @@ a.date-big:hover{text-decoration:none;color:inherit}
     </p>
 
     <div class="dates-hero__grid">
-      <a class="date-big" href="#anmeldung">
+      <a class="date-big" href="#anmeldung-form">
         <span class="date-big__city">Wien</span>
         <span class="date-big__day">Mittwoch</span>
         <span class="date-big__date">10. Juni 2026</span>
@@ -933,7 +935,7 @@ a.date-big:hover{text-decoration:none;color:inherit}
           </div>
         </div>
       </a>
-      <a class="date-big" href="#anmeldung">
+      <a class="date-big" href="#anmeldung-form">
         <span class="date-big__city">Linz</span>
         <span class="date-big__day">Montag</span>
         <span class="date-big__date">15. Juni 2026</span>
@@ -945,7 +947,7 @@ a.date-big:hover{text-decoration:none;color:inherit}
           </div>
         </div>
       </a>
-      <a class="date-big" href="#anmeldung">
+      <a class="date-big" href="#anmeldung-form">
         <span class="date-big__city">Graz</span>
         <span class="date-big__day">Dienstag</span>
         <span class="date-big__date">16. Juni 2026</span>
