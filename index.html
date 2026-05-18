@@ -695,12 +695,12 @@ p{margin:0 0 1em 0;max-width:62ch}
   filter:drop-shadow(-12px 6px 24px rgba(26,58,107,0.14))
          drop-shadow(-4px 2px 8px rgba(26,58,107,0.07));
 }
-/* Mobile: Zoom auf Gerlindes Oberkörper – Anker bei 82% zeigt Kopf + Körper */
+/* Mobile: Zoom auf Gerlindes Oberkörper – Anker nahe Kopf zeigt Gesicht + Schultern */
 @media(max-width:839px){
   .newsletter__photo-img{
-    object-position:right 75%;
-    transform-origin:right 82%;
-    transform:scale(1.75);
+    object-position:right 5%;
+    transform-origin:right 18%;
+    transform:scale(1.6);
   }
 }
 /* Text-Spalte: linksbündig */
@@ -829,7 +829,7 @@ a.date-big:hover{text-decoration:none;color:inherit}
    Gilt für alle Anchor-Ziele, die unter dem fixed Topbar landen
    ========================================================= */
 #anmeldung{
-  scroll-margin-top:calc(var(--topbar-h) + 1.5rem);
+  scroll-margin-top:var(--topbar-h);
 }
 #anmeldung-form{
   scroll-margin-top:calc(var(--topbar-h) + 1.25rem);
@@ -1220,9 +1220,9 @@ a.date-big:hover{text-decoration:none;color:inherit}
           <label for="termin">Welcher Abend? <span style="color:var(--danger)" aria-hidden="true">*</span></label>
           <select id="termin" name="field[5]" required>
             <option value="">Bitte wählen …</option>
-            <option value="Wien · 10.06.2026">Wien – Mittwoch, 10. Juni 2026 · 18:30 Uhr</option>
-            <option value="Linz · 15.06.2026">Linz – Montag, 15. Juni 2026 · 18:30 Uhr</option>
-            <option value="Graz · 16.06.2026">Graz – Dienstag, 16. Juni 2026 · 18:30 Uhr</option>
+            <option value="Wien - Mittwoch, 10. Juni 2026 • 18:30 Uhr">Wien – Mittwoch, 10. Juni 2026 · 18:30 Uhr</option>
+            <option value="Linz - Montag, 15. Juni 2026 • 18:30 Uhr">Linz – Montag, 15. Juni 2026 · 18:30 Uhr</option>
+            <option value="Graz - Dienstag, 16. Juni 2026 • 18:30 Uhr">Graz – Dienstag, 16. Juni 2026 · 18:30 Uhr</option>
           </select>
           <span class="field__error">Bitte wählen Sie einen Termin.</span>
         </div>
