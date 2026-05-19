@@ -1717,6 +1717,10 @@ document.addEventListener('click', e => {
 
 /* =========================================================
    Newsletter JSONP Submission – AC Form 19 (ABC Newsletter Anmeldung)
+   WICHTIG: AC's proc.php ruft immer window._show_thank_you / _show_error
+   auf, unabhängig vom callback=-Parameter. Wir ersetzen diese Funktionen
+   daher temporär vor dem JSONP-Call und stellen die Originale danach
+   wieder her – so bleibt das Anmeldeformular unberührt.
    ========================================================= */
 (function(){
   const nlForm   = document.getElementById('newsletter-form');
@@ -1726,8 +1730,8 @@ document.addEventListener('click', e => {
   const nlName   = document.getElementById('nl-name');
   if (!nlForm || !nlMsg || !nlSubmit || !nlEmail) return;
 
-  /* AC-Callbacks */
-  window._nl_ok = function() {
+  /* Interne Hilfsfunktionen für Newsletter-Meldungen */
+  function nlSuccess() {
     nlMsg.className = 'form-msg form-msg--success';
     nlMsg.textContent = 'Danke! Sie erhalten in Kürze eine Bestätigungs-E-Mail.';
     nlSubmit.textContent = 'Eingetragen ✓';
@@ -1735,13 +1739,13 @@ document.addEventListener('click', e => {
     nlEmail.disabled  = true;
     if (nlName) nlName.disabled = true;
     nlMsg.scrollIntoView({behavior:'smooth', block:'center'});
-  };
-  window._nl_err = function() {
+  }
+  function nlError() {
     nlMsg.className = 'form-msg form-msg--error';
     nlMsg.textContent = 'Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut oder schreiben Sie an office@pramer.com.';
     nlSubmit.disabled = false;
     nlSubmit.textContent = 'Impulse erhalten';
-  };
+  }
 
   nlForm.addEventListener('submit', function(e) {
     e.preventDefault();
@@ -1799,11 +1803,22 @@ document.addEventListener('click', e => {
     }
     const serialized = parts.join('&');
 
+    /* AC-Callbacks temporär auf Newsletter umleiten, danach Originale
+       wiederherstellen damit das Anmeldeformular unberührt bleibt */
+    const origThankYou  = window._show_thank_you;
+    const origShowError = window._show_error;
+    function restoreCallbacks() {
+      window._show_thank_you = origThankYou;
+      window._show_error     = origShowError;
+    }
+    window._show_thank_you = function() { nlSuccess(); restoreCallbacks(); };
+    window._show_error     = function() { nlError();   restoreCallbacks(); };
+
     /* JSONP laden */
     const s = document.createElement('script');
     s.charset = 'utf-8';
-    s.src = 'https://pramer21406.activehosted.com/proc.php?' + serialized + '&jsonp=true&callback=_nl_ok';
-    s.onerror = function() { window._nl_err(); };
+    s.src = 'https://pramer21406.activehosted.com/proc.php?' + serialized + '&jsonp=true';
+    s.onerror = function() { nlError(); restoreCallbacks(); };
     document.head.appendChild(s);
   });
 })();
