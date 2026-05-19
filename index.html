@@ -721,7 +721,7 @@ p{margin:0 0 1em 0;max-width:62ch}
 .newsletter form{display:flex;flex-direction:column;gap:.75rem;margin-top:1.5rem;text-align:left}
 .nl-row{display:grid;gap:.75rem;grid-template-columns:1fr;align-items:stretch}
 @media(min-width:600px){.nl-row{grid-template-columns:1fr auto}}
-.nl-row .btn{white-space:nowrap;padding:.85rem 1.6rem;min-height:0}
+.nl-row .btn{white-space:nowrap;padding:.85rem 1.6rem;min-height:0;align-self:end}
 .nl-row .field input{padding:.85rem 1rem}
 .nl-consent{justify-content:flex-start;text-align:left;font-size:.85rem}
 
@@ -1356,18 +1356,19 @@ a.date-big:hover{text-decoration:none;color:inherit}
         <input type="hidden" name="field[3]" value="abc.pramer.com">
         <input type="hidden" name="field[4]" id="nl-field-datum" value="">
 
-        <!-- Optionales Namensfeld -->
-        <div class="field" id="nl-name-field">
-          <label for="nl-name">Name <span class="opt">(optional)</span></label>
-          <input type="text" id="nl-name" name="fullname" autocomplete="name" placeholder="Vorname NACHNAME">
-          <span class="field__error">Bitte geben Sie mindestens Vor- und Nachnamen ein.</span>
+        <!-- E-Mail-Feld – vollbreit, sichtbares Label ohne Pflichtfeld-Stern -->
+        <div class="field">
+          <label for="nl-email">E-Mail-Adresse</label>
+          <input type="email" id="nl-email" name="email" autocomplete="email" inputmode="email" placeholder="ihre@adresse.at" required>
+          <span class="field__error">Bitte eine gültige E-Mail-Adresse angeben.</span>
         </div>
 
+        <!-- Name (optional) + Button nebeneinander -->
         <div class="nl-row">
-          <div class="field">
-            <label for="nl-email" class="sr-only">Ihre E-Mail-Adresse</label>
-            <input type="email" id="nl-email" name="email" autocomplete="email" inputmode="email" placeholder="ihre@adresse.at" required>
-            <span class="field__error">Bitte eine gültige E-Mail-Adresse angeben.</span>
+          <div class="field" id="nl-name-field">
+            <label for="nl-name">Name <span class="opt">(optional)</span></label>
+            <input type="text" id="nl-name" name="fullname" autocomplete="name" placeholder="Vorname NACHNAME">
+            <span class="field__error">Bitte geben Sie mindestens Vor- und Nachnamen ein.</span>
           </div>
           <button type="submit" id="nl-submit" class="btn btn--primary">Impulse erhalten</button>
         </div>
