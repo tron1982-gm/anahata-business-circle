@@ -1220,6 +1220,8 @@ a.date-big:hover{text-decoration:none;color:inherit}
       <input type="hidden" name="act" value="sub">
       <input type="hidden" name="v" value="2">
       <input type="hidden" name="or" value="69b1b057-f666-4f9b-bf72-762fa61e5658">
+      <input type="hidden" name="field[3]" value="abc.pramer.com">
+      <input type="hidden" name="field[4]" id="field-datum" value="">
 
       <div class="form-grid">
 
@@ -1272,8 +1274,8 @@ a.date-big:hover{text-decoration:none;color:inherit}
         </div>
         <div class="field">
           <label for="phone">Telefonnummer <span style="color:var(--danger)" aria-hidden="true">*</span></label>
-          <input type="tel" id="phone" name="phone" autocomplete="tel" inputmode="tel" required>
-          <span class="field__error">Bitte geben Sie Ihre Telefonnummer an.</span>
+          <input type="tel" id="phone" name="phone" autocomplete="tel" inputmode="tel" placeholder="+43 664 123 456 78" required>
+          <span class="field__error">Bitte Nummer mit Ländervorwahl angeben – z. B. +43 664 123 456 78.</span>
         </div>
 
         <!-- Unternehmen & Position -->
@@ -1293,7 +1295,8 @@ a.date-big:hover{text-decoration:none;color:inherit}
         </div>
         <div class="field">
           <label for="jahrgang">Jahrgang <span class="opt">(optional)</span></label>
-          <input type="number" id="jahrgang" name="field[17]" min="1930" max="2010" placeholder="z. B. 1972">
+          <input type="number" id="jahrgang" name="field[17]" min="1930" placeholder="z. B. 1972">
+          <span class="field__error">Mindestalter: 18 Jahre.</span>
         </div>
 
         <!-- Checkboxen -->
@@ -1339,31 +1342,34 @@ a.date-big:hover{text-decoration:none;color:inherit}
         Gelegentliche kurze Impulse per E-Mail. Keine Werbung, kein Marketing. Nur das, was wir auch im Circle teilen würden.
       </p>
 
-      <form
-        method="POST"
-        action="REPLACE_WITH_ACTIVECAMPAIGN_NEWSLETTER_FORM_ACTION_URL"
-        id="newsletter-form"
-        novalidate
-      >
-        <input type="hidden" name="u" value="REPLACE_WITH_AC_ACCOUNT_ID">
-        <input type="hidden" name="f" value="REPLACE_WITH_AC_NEWSLETTER_FORM_ID">
+      <form id="newsletter-form" novalidate>
+        <!-- AC Newsletter-Formular f=19 (eigenständig, ABC Newsletter Anmeldung) -->
+        <input type="hidden" name="u"   value="19">
+        <input type="hidden" name="f"   value="19">
         <input type="hidden" name="s">
-        <input type="hidden" name="c" value="0">
-        <input type="hidden" name="m" value="0">
+        <input type="hidden" name="c"   value="0">
+        <input type="hidden" name="m"   value="0">
         <input type="hidden" name="act" value="sub">
-        <input type="hidden" name="v" value="2">
+        <input type="hidden" name="v"   value="2">
+        <input type="hidden" name="or"  value="cb8e646c-5f3b-431d-9196-e81f2ee82c23">
+        <!-- Tracking-Felder (account-weit) -->
+        <input type="hidden" name="field[3]" value="abc.pramer.com">
+        <input type="hidden" name="field[4]" id="nl-field-datum" value="">
 
-        <label class="consent nl-consent">
-          <input type="checkbox" name="datenschutz" value="ja" required>
-          <span>Ich stimme dem Erhalt der Impulse per E-Mail zu. Abmeldung jederzeit per Klick.</span>
-        </label>
+        <!-- Optionales Namensfeld -->
+        <div class="field" id="nl-name-field">
+          <label for="nl-name">Name <span class="opt">(optional)</span></label>
+          <input type="text" id="nl-name" name="fullname" autocomplete="name" placeholder="Vorname NACHNAME">
+          <span class="field__error">Bitte geben Sie mindestens Vor- und Nachnamen ein.</span>
+        </div>
 
         <div class="nl-row">
           <div class="field">
             <label for="nl-email" class="sr-only">Ihre E-Mail-Adresse</label>
             <input type="email" id="nl-email" name="email" autocomplete="email" inputmode="email" placeholder="ihre@adresse.at" required>
+            <span class="field__error">Bitte eine gültige E-Mail-Adresse angeben.</span>
           </div>
-          <button type="submit" class="btn btn--primary">Impulse erhalten</button>
+          <button type="submit" id="nl-submit" class="btn btn--primary">Impulse erhalten</button>
         </div>
       </form>
 
@@ -1550,15 +1556,76 @@ document.addEventListener('click', e => {
   const msgEl   = document.getElementById('form-msg');
   const submitBtn = form.querySelector('button[type="submit"]');
 
+  /* Telefonnummer normalisieren:
+     0043... → +43..., 00xx... → +xx..., 0664... → +43664..., 43... → +43...
+     Leerzeichen / Bindestriche / Klammern werden entfernt. */
+  function normalizePhone(raw) {
+    let v = raw.replace(/[\s\-\/\(\)\.]/g, '');
+    if (v.startsWith('0043'))    v = '+43' + v.slice(4);
+    else if (v.startsWith('00')) v = '+'   + v.slice(2);
+    else if (v.startsWith('0'))  v = '+43' + v.slice(1);
+    else if (/^43\d/.test(v))    v = '+'   + v;
+    return v;
+  }
+
+  function applyPhoneNormalization(phoneEl) {
+    const raw = phoneEl.value.trim();
+    if (!raw) {
+      phoneEl.setCustomValidity('Bitte Telefonnummer eingeben.');
+      return;
+    }
+    const normalized = normalizePhone(raw);
+    if (/^\+\d{7,15}$/.test(normalized)) {
+      phoneEl.value = normalized;          /* Wert im Feld korrigieren */
+      phoneEl.setCustomValidity('');
+    } else {
+      phoneEl.setCustomValidity('Ungültiges Format.');
+    }
+  }
+
+  const phoneEl    = form.querySelector('#phone');
+  const jahrgangEl = form.querySelector('#jahrgang');
+
+  /* Jahrgang: max dynamisch auf aktuelles Jahr − 18 setzen */
+  if (jahrgangEl) {
+    jahrgangEl.max = new Date().getFullYear() - 18;
+  }
+
+  /* Jahrgang-Validierung anzeigen/verstecken */
+  function validateJahrgang() {
+    if (!jahrgangEl) return;
+    const field = jahrgangEl.closest('.field');
+    if (!field) return;
+    const v = jahrgangEl.value;
+    if (v === '') {
+      /* Feld ist optional – leer ist OK */
+      field.classList.remove('field--error');
+      jahrgangEl.setCustomValidity('');
+    } else if (!jahrgangEl.checkValidity()) {
+      field.classList.add('field--error');
+    } else {
+      field.classList.remove('field--error');
+      jahrgangEl.setCustomValidity('');
+    }
+  }
+
+  if (jahrgangEl) {
+    jahrgangEl.addEventListener('blur',   validateJahrgang);
+    jahrgangEl.addEventListener('change', validateJahrgang);
+    jahrgangEl.addEventListener('input',  validateJahrgang);
+  }
+
   /* Live-Validierung bei blur / change */
   form.querySelectorAll('input[required], select[required]').forEach(input => {
     input.addEventListener('blur', () => {
+      if (input === phoneEl) applyPhoneNormalization(phoneEl);
       const field = input.closest('.field');
       if(!field) return;
       if(input.checkValidity()) field.classList.remove('field--error');
       else field.classList.add('field--error');
     });
     input.addEventListener('change', () => {
+      if (input === phoneEl) applyPhoneNormalization(phoneEl);
       const field = input.closest('.field');
       if(!field) return;
       if(input.checkValidity()) field.classList.remove('field--error');
@@ -1578,7 +1645,7 @@ document.addEventListener('click', e => {
   /* AC-Callback: Fehler */
   window._show_error = function() {
     msgEl.className = 'form-msg form-msg--error';
-    msgEl.textContent = 'Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt an office@gerlindepramer.at.';
+    msgEl.textContent = 'Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt an office@pramer.com.';
     submitBtn.disabled = false;
     submitBtn.textContent = 'Verbindlich anmelden';
   };
@@ -1609,6 +1676,12 @@ document.addEventListener('click', e => {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
 
+    /* Telefonnummer normalisieren, bevor Validierung greift */
+    if (phoneEl) applyPhoneNormalization(phoneEl);
+
+    /* Jahrgang prüfen (optional, aber wenn ausgefüllt im gültigen Bereich) */
+    validateJahrgang();
+
     /* Validierung */
     if(!form.checkValidity()){
       const firstInvalid = form.querySelector(':invalid');
@@ -1627,8 +1700,110 @@ document.addEventListener('click', e => {
     msgEl.className = 'form-msg';
     msgEl.textContent = '';
 
+    /* Datum der Anmeldung setzen (ISO-Format, z. B. 2026-05-18) */
+    const datumEl = document.getElementById('field-datum');
+    if (datumEl) {
+      const now = new Date();
+      datumEl.value = now.getFullYear() + '-' +
+        String(now.getMonth() + 1).padStart(2, '0') + '-' +
+        String(now.getDate()).padStart(2, '0');
+    }
+
     const serialized = serializeForm(form);
     loadScript('https://pramer21406.activehosted.com/proc.php?' + serialized + '&jsonp=true');
+  });
+})();
+
+/* =========================================================
+   Newsletter JSONP Submission – AC Form 19 (ABC Newsletter Anmeldung)
+   ========================================================= */
+(function(){
+  const nlForm   = document.getElementById('newsletter-form');
+  const nlMsg    = document.getElementById('nl-msg');
+  const nlSubmit = document.getElementById('nl-submit');
+  const nlEmail  = document.getElementById('nl-email');
+  const nlName   = document.getElementById('nl-name');
+  if (!nlForm || !nlMsg || !nlSubmit || !nlEmail) return;
+
+  /* AC-Callbacks */
+  window._nl_ok = function() {
+    nlMsg.className = 'form-msg form-msg--success';
+    nlMsg.textContent = 'Danke! Sie erhalten in Kürze eine Bestätigungs-E-Mail.';
+    nlSubmit.textContent = 'Eingetragen ✓';
+    nlSubmit.disabled = true;
+    nlEmail.disabled  = true;
+    if (nlName) nlName.disabled = true;
+    nlMsg.scrollIntoView({behavior:'smooth', block:'center'});
+  };
+  window._nl_err = function() {
+    nlMsg.className = 'form-msg form-msg--error';
+    nlMsg.textContent = 'Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut oder schreiben Sie an office@pramer.com.';
+    nlSubmit.disabled = false;
+    nlSubmit.textContent = 'Impulse erhalten';
+  };
+
+  nlForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    let hasError = false;
+
+    /* Name validieren (optional – wenn ausgefüllt, mindestens 2 Zeichen) */
+    if (nlName) {
+      nlName.value = nlName.value.trim();
+      const nf = nlName.closest('.field');
+      if (nlName.value.length > 0 && nlName.value.length < 2) {
+        nf.classList.add('field--error');
+        hasError = true;
+      } else {
+        nf.classList.remove('field--error');
+      }
+    }
+
+    /* E-Mail validieren */
+    const ef = nlEmail.closest('.field');
+    nlEmail.value = nlEmail.value.trim();
+    if (!nlEmail.value || !nlEmail.checkValidity()) {
+      ef.classList.add('field--error');
+      if (!hasError) nlEmail.focus();
+      hasError = true;
+    } else {
+      ef.classList.remove('field--error');
+    }
+
+    if (hasError) return;
+
+    nlSubmit.disabled = true;
+    nlSubmit.textContent = 'Wird eingetragen …';
+    nlMsg.className = 'form-msg';
+    nlMsg.textContent = '';
+
+    /* Datum der Anmeldung setzen (ISO-Format, z. B. 2026-05-18) */
+    const nlDatum = document.getElementById('nl-field-datum');
+    if (nlDatum) {
+      const now = new Date();
+      nlDatum.value = now.getFullYear() + '-' +
+        String(now.getMonth() + 1).padStart(2, '0') + '-' +
+        String(now.getDate()).padStart(2, '0');
+    }
+
+    /* Formular serialisieren */
+    const parts = [];
+    for (const el of nlForm.elements) {
+      if (!el.name) continue;
+      const t = el.type;
+      if (t === 'submit' || t === 'button' || t === 'reset') continue;
+      if ((t === 'checkbox' || t === 'radio') && !el.checked) continue;
+      /* Leeres optionales Namensfeld nicht mitsenden */
+      if (el.name === 'fullname' && !el.value) continue;
+      parts.push(el.name + '=' + encodeURIComponent(el.value));
+    }
+    const serialized = parts.join('&');
+
+    /* JSONP laden */
+    const s = document.createElement('script');
+    s.charset = 'utf-8';
+    s.src = 'https://pramer21406.activehosted.com/proc.php?' + serialized + '&jsonp=true&callback=_nl_ok';
+    s.onerror = function() { window._nl_err(); };
+    document.head.appendChild(s);
   });
 })();
 </script>
