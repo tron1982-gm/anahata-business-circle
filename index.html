@@ -853,6 +853,25 @@ a.date-big:hover{text-decoration:none;color:inherit}
 <body>
 
 <!-- =========================================================
+     Bestätigungs-Banner (erscheint nach DOI-Confirmation)
+     ========================================================= -->
+<div id="bestaetigt-banner" role="alert" aria-live="polite" style="display:none;position:fixed;top:0;left:0;right:0;z-index:9999;background-color:#1A3A6B;color:#FAF7F2;text-align:center;padding:16px 24px;font-family:'Outfit',Arial,sans-serif;font-size:16px;line-height:1.5;box-shadow:0 2px 12px rgba(0,0,0,0.18);">
+  <span style="margin-right:12px;">✓</span>
+  <strong>Ihr Abonnement ist bestätigt.</strong> Willkommen bei den Impulsen von Mag. Gerlinde Pramer.
+  <button onclick="document.getElementById('bestaetigt-banner').style.display='none';" aria-label="Schließen" style="margin-left:20px;background:none;border:1px solid rgba(255,255,255,0.4);color:#FAF7F2;padding:4px 12px;border-radius:4px;cursor:pointer;font-size:14px;font-family:inherit;">✕</button>
+</div>
+<script>
+  (function() {
+    if (window.location.search.indexOf('bestaetigt=1') !== -1) {
+      document.getElementById('bestaetigt-banner').style.display = 'block';
+      // URL ohne Parameter bereinigen
+      var url = window.location.pathname;
+      window.history.replaceState({}, document.title, url);
+    }
+  })();
+</script>
+
+<!-- =========================================================
      Top bar – fixed, scroll-triggered
      ========================================================= -->
 <header class="topbar" id="topbar" aria-label="Hauptnavigation">
