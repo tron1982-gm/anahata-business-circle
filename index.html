@@ -752,39 +752,51 @@ p{margin:0 0 1em 0;max-width:62ch}
 /* =========================================================
    Footer
    ========================================================= */
-.footer{background:var(--ink);color:#C5CCD7;padding:clamp(2.5rem, 6vw, 4rem) 0 1.5rem;font-size:.95rem}
-.footer a{color:#E8EDF3}
+.footer{background:var(--ink);color:#C5CCD7;padding:clamp(2.5rem, 6vw, 4rem) 0 1.5rem;font-size:.95rem;line-height:1.75}
+.footer a{color:#fff;transition:color .2s}
 .footer a:hover{color:var(--gold)}
 .footer__grid{display:grid;gap:2.5rem;grid-template-columns:1fr;margin-bottom:2.5rem}
 @media(min-width:760px){.footer__grid{grid-template-columns:2fr 1fr 1fr}}
 .footer__brand{display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem;color:#fff}
 .footer__brand .brand__sub{color:#9097A3}
-.footer h4{color:#fff;font-family:'Outfit',sans-serif;font-size:.85rem;letter-spacing:.18em;text-transform:uppercase;margin-bottom:.75rem}
+.footer h4{color:rgba(255,255,255,.55);font-family:'Inter',sans-serif;font-weight:600;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;margin-bottom:1.1rem}
 .footer ul{list-style:none;padding:0;margin:0}
-.footer li{margin-bottom:.4rem}
+.footer li{margin-bottom:.55rem}
+.footer ul a{font-size:.9rem}
 .footer__logos{
   display:flex;flex-wrap:wrap;align-items:center;gap:2rem;
   margin:1.5rem 0 0;
   padding:1.25rem 0;
   border-top:1px solid #2D3848;
 }
+.footer__logo-link{position:relative;display:inline-block}
 .footer__logo--gpm{
   height:54px;width:auto;
   /* dunkelblaues Original-Logo auf dunklem BG → invertieren */
   filter:brightness(0) invert(1);
   opacity:.92;
+  transition:opacity .3s ease;
 }
 .footer__logo--signatur{
   height:34px;width:auto;
   opacity:.95;
+  transition:opacity .3s ease;
 }
+.footer__logo--gold{
+  position:absolute;top:0;left:0;
+  opacity:0;
+  filter:none;
+}
+.footer__logo-link:hover .footer__logo--gpm:not(.footer__logo--gold){opacity:0}
+.footer__logo-link:hover .footer__logo--signatur:not(.footer__logo--gold){opacity:0}
+.footer__logo-link:hover .footer__logo--gold{opacity:1}
 .footer__bottom{
   border-top:1px solid #2D3848;padding-top:1.5rem;
   display:flex;flex-wrap:wrap;justify-content:space-between;gap:.75rem;
-  font-size:.85rem;color:#8B95A4;
+  font-size:.8rem;color:rgba(255,255,255,.45);
 }
 .footer__bottom .heart{color:#FF6D8E;display:inline-block;transform:translateY(.05em)}
-.footer__bottom a{color:#A7B2C2;text-decoration:none}
+.footer__bottom a{color:rgba(255,255,255,.45);text-decoration:none}
 .footer__bottom a:hover{color:var(--gold)}
 
 /* =========================================================
@@ -1463,18 +1475,20 @@ a.date-big:hover{text-decoration:none;color:inherit}
     <div class="footer__grid">
       <div>
         <div class="footer__brand" style="margin-bottom:.75rem">
-          <img src="img/logo-anahata-1line-white.svg" alt="Gerlinde Pramer's Anahata Business Circle" style="height:104px;width:auto;max-width:100%">
+          <img src="img/logo-anahata-1line-white-2D.svg" alt="Gerlinde Pramer's Anahata Business Circle" style="height:104px;width:auto;max-width:100%">
         </div>
         <p style="max-width:42ch;color:rgba(255,255,255,.7);margin-top:.5rem;font-size:.95rem">
           Ein neues Format für Unternehmer und Führungskräfte, die mehr suchen als nur das nächste Tool.
         </p>
 
         <div class="footer__logos" aria-label="Logos">
-          <a href="https://www.pramer.com" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.pramer.com" target="_blank" rel="noopener noreferrer" class="footer__logo-link">
             <img class="footer__logo--gpm" src="img/gpm-logo.png" alt="Gerlinde Pramer Management" width="600" height="353">
+            <img class="footer__logo--gpm footer__logo--gold" src="img/gpm-logo-gold.png" alt="" aria-hidden="true" width="600" height="353">
           </a>
-          <a href="https://www.pramer.com" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.pramer.com" target="_blank" rel="noopener noreferrer" class="footer__logo-link">
             <img class="footer__logo--signatur" src="img/signatur-3-white.svg" alt="Mag. Gerlinde Pramer">
+            <img class="footer__logo--signatur footer__logo--gold" src="img/signatur-3-gold.svg" alt="" aria-hidden="true">
           </a>
         </div>
       </div>
