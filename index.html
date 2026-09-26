@@ -217,7 +217,8 @@ p{margin:0 0 1em 0;max-width:62ch}
 
 /* Drawer overlay */
 .drawer{
-  position:fixed;top:var(--topbar-h);left:0;right:0;
+  position:fixed;top:var(--topbar-h);left:0;right:0;bottom:0;
+  overflow-y:auto;overscroll-behavior:contain;
   background:var(--cream);
   border-bottom:1px solid var(--line);
   box-shadow:0 12px 40px rgba(26,58,107,.12);
@@ -798,10 +799,15 @@ p{margin:0 0 1em 0;max-width:62ch}
 .footer__bottom .heart{color:#FF6D8E;display:inline-block;transform:translateY(.05em)}
 .footer__bottom a{color:rgba(255,255,255,.45);text-decoration:none}
 .footer__bottom a:hover{color:var(--gold)}
-.footer__social{display:flex;gap:.75rem;margin-top:1.5rem}
-.footer__social a{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border:1px solid rgba(255,255,255,.3);border-radius:50%;color:#fff;transition:color .2s,border-color .2s,background-color .2s}
-.footer__social a:hover,.footer__social a:focus-visible{color:var(--gold);border-color:var(--gold)}
-.footer__social svg{width:20px;height:20px;fill:currentColor}
+.footer__social{display:flex;gap:1.25rem;margin-top:1.5rem}
+.footer__social a{display:inline-flex;align-items:center;justify-content:flex-start;min-width:44px;min-height:44px;color:#fff;transition:color .2s}
+.footer__social a:hover,.footer__social a:focus-visible{color:var(--gold)}
+.footer__social svg{width:27px;height:27px;fill:currentColor}
+.footer__brand-link{position:relative;display:inline-block;line-height:0}
+.footer__brand-link img{height:104px;width:auto;max-width:100%;transition:opacity .2s}
+.footer__brand-link .footer__brand-gold{position:absolute;top:0;left:0;opacity:0}
+.footer__brand-link:hover .footer__brand-white,.footer__brand-link:focus-visible .footer__brand-white{opacity:0}
+.footer__brand-link:hover .footer__brand-gold,.footer__brand-link:focus-visible .footer__brand-gold{opacity:1}
 
 /* =========================================================
    Utility
@@ -1638,7 +1644,10 @@ a.date-big:hover{text-decoration:none;color:inherit}
     <div class="footer__grid">
       <div>
         <div class="footer__brand" style="margin-bottom:.75rem">
-          <img src="img/logo-anahata-1line-white-2D.svg" alt="Gerlinde Pramer's Anahata Business Circle" style="height:104px;width:auto;max-width:100%">
+          <a href="#top" class="footer__brand-link" aria-label="Gerlinde Pramer's Anahata Business Circle – nach oben">
+            <img class="footer__brand-white" src="img/logo-anahata-1line-white-2D.svg" alt="Gerlinde Pramer's Anahata Business Circle">
+            <img class="footer__brand-gold" src="img/logo-anahata-1line-gold-2D.svg" alt="" aria-hidden="true">
+          </a>
         </div>
         <p style="max-width:42ch;color:rgba(255,255,255,.7);margin-top:.5rem;font-size:.95rem">
           Ein neues Format für Unternehmer und Führungskräfte, die mehr suchen als nur das nächste Tool.
@@ -1682,7 +1691,7 @@ a.date-big:hover{text-decoration:none;color:inherit}
           <li><a href="index.html" style="color:var(--gold);text-decoration:underline;font-weight:600">Business Circle</a></li>
           <li><a href="https://www.pramer.com/1-1-begleitung/" target="_blank" rel="noopener noreferrer">1:1 Begleitung</a></li>
           <li><a href="https://www.pramer.com/coaching/" target="_blank" rel="noopener noreferrer">Retreat &amp; Coaching</a></li>
-          <li><a href="https://www.pramer.com/keynote/" target="_blank" rel="noopener noreferrer">Keynote</a></li>
+          <li><a href="https://www.pramer.com/keynote/" target="_blank" rel="noopener noreferrer">Keynotes</a></li>
         </ul>
       </div>
     </div>
