@@ -8,7 +8,12 @@ Landingpage für den **Anahata Business Circle** von **Mag. Gerlinde Pramer** �
 - **Kleine, gezielte Änderungen.** Nur das ändern, worum gebeten wurde.
 - Wenn ein Wunsch unklar ist: **zuerst nachfragen**, dann ändern.
 - Am Ende in 2–4 Sätzen sagen, was geändert wurde, und dass Mag. Gerlinde Pramer jetzt auf GitHub den Pull Request mit „Merge pull request" übernehmen kann. Danach ist die Änderung nach ca. 1–2 Minuten in der **Vorschau** sichtbar (GitHub Pages dieses Repos: `https://<github-name>.github.io/anahata-business-circle/`).
-- **Niemals selbst live schalten.** Live geht die Seite ausschließlich über „Actions" → **„Website live schalten"**, gestartet von Mag. Gerlinde Pramer.
+- **Übernehmen und live schalten nur auf ausdrückliche Anweisung.**
+  - Sagt Mag. Gerlinde Pramer z. B. „Übernimm die Änderung“: den Pull Request in `main` mergen (`gh pr merge --merge`). Danach sagen, dass die Vorschau in 1–2 Minuten aktualisiert ist, und die Vorschau-Adresse nennen.
+  - Sagt sie z. B. „Schalte live“: den Ablauf starten mit `gh workflow run live-schalten.yml --ref main -f testlauf=false`, ca. 1–3 Minuten warten, mit `gh run list --workflow=live-schalten.yml --limit 1` das Ergebnis prüfen und in einem Satz melden (erfolgreich oder fehlgeschlagen).
+  - Nie von dir aus übernehmen oder live schalten, auch nicht „zur Sicherheit“ oder als Test. Vorher immer die Vorschau von ihr bestätigen lassen.
+  - Klappt das Starten nicht (fehlende Rechte o. Ä.): erklären, dass sie es auf github.com unter „Actions“ → „Website live schalten“ → „Run workflow“ selbst starten kann.
+- **Rückgängig machen:** Sagt sie „Mach die letzte Änderung rückgängig“, einen Pull Request mit `git revert` der letzten Änderung anlegen – nie Verlauf löschen oder überschreiben.
 - Keine Zugangsdaten, Passwörter oder Tokens in Dateien schreiben. Dieses Repo ist öffentlich.
 
 ## Welche Dateien zählen
